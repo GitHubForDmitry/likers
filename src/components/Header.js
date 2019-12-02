@@ -1,43 +1,35 @@
-import React from 'react';
+import React, { useState } from "react";
 import {
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 
-const Header = () => {
+export default function Header() {
+    const [active, setActive] = useState(false);
+
+    const toggleBurger = () => setActive(!active);
     return (
-        <div className="header">
-            <div className="header__container">
-                <div className="header__wrapper">
-                    <div className="header__nav">
-                        <ul className="header__menu">
-                            <li className="header__item">
-                                <Link to="/" className="header__link" href="/">
-                                    <i></i>
-                                    <i></i>
-                                    <i></i>
-                                </Link>
-                            </li>
-                            <li className="header__item">
-                                <Link to="/clients" className="header__link" href="/clients">
-                                    clients
-                                </Link>
-                            </li>
-                            <li className="header__item">
-                                <Link to="/news" className="header__link" href="/news">
-                                    news
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className="header__logo">some cool logo</div>
-                    <div className="header__search">
-                        <input type="search"></input> 
-                    </div>
-                </div>
+        <div>
+            <nav>
+                <ul>
+                    <li>
+                        <div className={active ? "menu-burger active" : "menu-burger"} onClick={toggleBurger}>
+                            <div className="menu-burger__slice"></div>
+                            <div className="menu-burger__slice"></div>
+                            <div className="menu-burger__slice"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <Link to="/clients">Clients</Link>
+                    </li>
+                    <li>
+                        <Link to="/news">News</Link>
+                    </li>
+                </ul>
+            </nav>
+            <div className="header__logo">some cool logo</div>
+            <div className="header__search">
+                <input type="search"/>
             </div>
-        </div>  
-
-    )
+        </div>
+    );
 }
-
-export default Header;

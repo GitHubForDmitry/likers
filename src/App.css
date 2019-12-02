@@ -1,0 +1,46 @@
+.App__container {
+  display: flex;
+  width: 1024px;
+  background-color: palegoldenrod;
+}
+
+.menu-burger {
+  width: 60px;
+  height: 45px;
+  position: relative;
+  margin: 50px auto;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.menu-burger {
+  cursor: pointer;
+  display: inline-block;
+}
+.menu-burger__slice {
+  width: 35px;
+  height: 5px;
+  background-color: #000;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+.active .menu-burger__slice:nth-child(1) {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+.active .menu-burger__slice:nth-child(2) {
+  opacity: 0;
+}
+.active .menu-burger__slice:nth-child(3) {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+/*# sourceMappingURL=App.css.map */

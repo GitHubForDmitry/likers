@@ -2,7 +2,7 @@ import React from 'react';
 
 const Clients = () => {
     return (
-        <p>news</p>
+        <p>clients</p>
     )
 }
 
