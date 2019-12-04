@@ -1,4 +1,5 @@
 $lightblue: #c7dddd;
+$black: #1a1a1d;
 @mixin displayFlexCenter {
   display: flex;
   justify-content: center;
@@ -18,12 +19,12 @@ $lightblue: #c7dddd;
      &__container {
        width: 1800px;
        margin: 0 auto;
-
        &--wrapper {
          display: flex;
          flex-direction: row;
          justify-content: flex-start;
          align-items: center;
+         margin-bottom: 180px;
        }
      }
        &__decoration-block {
@@ -47,12 +48,88 @@ $lightblue: #c7dddd;
     margin-right: 50px;
   }
   &__link {
-    color: #000;
+    color: $black;
 
     font-weight: 700;
     letter-spacing: 0.1em;
     text-decoration: none;
     text-transform: uppercase;
+  }
+  &__social {
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    margin-right: 240px;
+    &--link {
+      display: block;
+      text-decoration: none;
+      width: 17px;
+      height: 17px;
+      margin-bottom: 40px;
+      svg {
+        width: 17px;
+        height: 17px;
+        fill: $black;
+        transition: .2s;
+        :hover {
+          fill: $lightblue;
+          transition: .2s;
+        }
+      }
+    }
+  }
+  &__list {
+    padding-top: 200px;
+    width: 20px;
+    &--line {
+      display: block;
+      width: 2px;
+      height: 62px;
+      margin: 0 auto 75px;
+      background-color: $black;
+    }
+    &--number {
+      font-size: 24px;
+      font-weight: bold;
+      color: $black;
+      transform: rotate(270deg);
+    }
+  }
+  &__person {
+    position: relative;
+    display: inline-block;
+    width: 1124px;
+    height: 800px;
+    background-color: #e2e8e8;
+    &--wrapper {
+      position: absolute;
+      top: 30%;
+      left: -80px;
+    }
+    &--name {
+      position: relative;
+      font-size: 100px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: $black;
+      &:first-child::after {
+        position: absolute;
+        top: calc(200% - 30px);
+        right: 0px;
+        content: "";
+        width: 60px;
+        height: 7px;
+        background-color: #fff;
+      }
+    }
+    &--profession {
+      padding-top: 75px;
+      letter-spacing: 0.15em;
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      color: $black;
+    }
   }
 }
 .menu-burger {
@@ -74,7 +151,7 @@ $lightblue: #c7dddd;
   &__slice {
   width: 35px;
   height: 5px;
-  background-color: #000;
+  background-color: $black;
   margin: 6px 0;
   transition: 0.4s;
   }
@@ -86,8 +163,8 @@ $lightblue: #c7dddd;
     opacity: 0;
   }
   .active &__slice:nth-child(3) {
-    -webkit-transform: rotate(45deg) translate(-8px, -8px);
-    transform: rotate(45deg) translate(-8px, -8px);
+    -webkit-transform: rotate(45deg) translate(-9px, -8px);
+    transform: rotate(45deg) translate(-9px, -8px);
   }
 }
 

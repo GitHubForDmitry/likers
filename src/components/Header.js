@@ -18,7 +18,8 @@ export default function Header() {
     }
     const toggleBurger = () => setActive(!active);
     return (
-        <div className="App__container--wrapper">
+        <div className="App__container">
+            <div className="App__container--wrapper">
             <nav>
                 <ul className="App__menu">
                     <li className="App__item">
@@ -51,5 +52,7 @@ export default function Header() {
                 <span onClick={onHandleSubmit}></span>
             </div>
         </div>
+        </div>
+
     );
 }
