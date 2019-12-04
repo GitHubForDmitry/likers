@@ -8,13 +8,16 @@ import News from "./components/News";
 function App() {
   return (
     <header className="App">
-        <Router className="App__container">
-            <Header className="App__header" />
-            <Switch>
-                <Route exact path="/clients" component={Clients}/>
-                <Route path="/news" component={News}/>
-            </Switch>
-        </Router>
+        <div className="App__container">
+            <Router>
+                <Header/>
+                <Switch>
+                    <Route exact path="/clients" component={Clients}/>
+                    <Route path="/news" component={News}/>
+                </Switch>
+            </Router>
+        </div>
+        <div className="App__decoration-block"></div>
     </header>
   );
 }
