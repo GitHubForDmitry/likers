@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  padding: 0;
+  padding: 1px;
 }
 
 .App {
@@ -9,17 +9,19 @@
   position: relative;
   width: 100%;
 }
+
 .App__container {
   width: 1800px;
   margin: 0 auto;
 }
+
 .App__container--wrapper {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
   margin-bottom: 180px;
 }
+
 .App__decoration-block {
   position: absolute;
   width: 33vw;
@@ -29,17 +31,20 @@
   z-index: -1;
   background-color: #c7dddd;
 }
+
 .App__menu {
   display: flex;
   flex-direction: row;
-  justify-content: start;
+  justify-content: flex-start;
   -webkit-align-items: center;
   align-items: center;
   list-style-type: none;
 }
+
 .App__item {
   margin-right: 50px;
 }
+
 .App__link {
   color: #1a1a1d;
   font-weight: 700;
@@ -47,12 +52,18 @@
   text-decoration: none;
   text-transform: uppercase;
 }
+
 .App__social {
-  display: inline-block;
-  vertical-align: top;
-  width: 20px;
-  margin-right: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
+.App__social--wrap {
+  display: flex;
+  flex-direction: column;
+}
+
 .App__social--link {
   display: block;
   text-decoration: none;
@@ -60,61 +71,76 @@
   height: 17px;
   margin-bottom: 40px;
 }
+
 .App__social--link svg {
   width: 17px;
   height: 17px;
   fill: #1a1a1d;
   transition: 0.2s;
 }
+
 .App__social--link svg :hover {
   fill: #c7dddd;
   transition: 0.2s;
 }
+
 .App__list {
-  padding-top: 200px;
   width: 20px;
+  height: auto;
 }
+
 .App__list--line {
   display: block;
   width: 2px;
-  height: 62px;
+  height: 0;
   margin: 0 auto 75px;
   background-color: #1a1a1d;
+  transition: 0.4s;
+  animation: line 1s forwards;
 }
+
 .App__list--number {
   font-size: 24px;
   font-weight: bold;
   color: #1a1a1d;
   transform: rotate(270deg);
 }
+
 .App__person {
   position: relative;
-  display: inline-block;
   width: 1124px;
   height: 800px;
   background-color: #e2e8e8;
 }
+
 .App__person--wrapper {
   position: absolute;
   top: 30%;
   left: -80px;
 }
+
 .App__person--name {
   position: relative;
   font-size: 100px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: #1a1a1d;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0px;
+  animation: reveal 2s forwards;
 }
-.App__person--name:first-child::after {
+
+.App__person--name:nth-child(2)::after {
   position: absolute;
-  top: calc(200% - 30px);
-  right: 0px;
+  bottom: 10px;
+  left: calc(100% + 30px);
   content: "";
-  width: 60px;
+  width: 0;
   height: 7px;
   background-color: #fff;
 }
+
 .App__person--profession {
   padding-top: 75px;
   letter-spacing: 0.15em;
@@ -122,112 +148,141 @@
   font-size: 20px;
   text-transform: uppercase;
   color: #1a1a1d;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: reveal 1s forwards 1s;
 }
 
-.menu-burger {
-  position: relative;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-  cursor: pointer;
+.App__play-profile {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
 }
 
-.menu-burger {
-  cursor: pointer;
-  display: inline-block;
-}
-.menu-burger__slice {
-  width: 35px;
-  height: 5px;
-  background-color: #1a1a1d;
-  margin: 6px 0;
-  transition: 0.4s;
-}
-.active .menu-burger__slice:nth-child(1) {
-  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-  transform: rotate(-45deg) translate(-9px, 6px);
-}
-.active .menu-burger__slice:nth-child(2) {
-  opacity: 0;
-}
-.active .menu-burger__slice:nth-child(3) {
-  -webkit-transform: rotate(45deg) translate(-9px, -8px);
-  transform: rotate(45deg) translate(-9px, -8px);
-}
-
-.header__logo {
-  margin-left: 30%;
+.App__play-profile--btn {
   display: flex;
-  justify-content: center;
   align-items: center;
-}
-.header__search {
-  display: flex;
-  margin-left: auto;
-  border: solid 5px black;
-  position: relative;
-  border-radius: 50px;
-}
-.header__search input[type=text] {
-  background-color: #c7dddd;
-  font-family: Raleway, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  width: 50px;
-  height: 50px;
-  padding: 5px 40px 5px 10px;
-  border: none;
-  box-sizing: border-box;
-  border-radius: 50px;
-  transition: width 800ms cubic-bezier(0.5, -0.5, 0.5, 0.5) 600ms;
-}
-.header__search input[type=text]:focus {
+  justify-content: center;
+  width: 110px;
+  height: 110px;
+  background-color: #fff;
+  border-width: 0;
   outline: none;
-}
-.header__search input[type=text]:focus, .header__search input[type=text]:not(:placeholder-shown) {
-  width: 300px;
-  transition: width 800ms cubic-bezier(0.5, -0.5, 0.5, 1.5);
-}
-.header__search input[type=text]:focus + span, .header__search input[type=text]:not(:placeholder-shown) + span {
-  bottom: 13px;
-  right: 10px;
-  transition: bottom 300ms ease-out 800ms, right 300ms ease-out 800ms;
-}
-.header__search input[type=text]:focus + span:after, .header__search input[type=text]:not(:placeholder-shown) + span:after {
-  top: 0;
-  right: 10px;
-  opacity: 1;
-  transition: top 300ms ease-out 1100ms, right 300ms ease-out 1100ms, opacity 300ms ease 1100ms;
-}
-.header__search span {
-  width: 25px;
-  height: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  bottom: -13px;
-  right: -15px;
-  transition: bottom 300ms ease-out 300ms, right 300ms ease-out 300ms;
-}
-.header__search span:before, .header__search span:after {
-  content: "";
-  height: 25px;
-  border-left: solid 5px black;
-  position: absolute;
-  transform: rotate(-45deg);
-}
-.header__search span:after {
-  transform: rotate(45deg);
-  opacity: 0;
-  top: -20px;
-  right: -10px;
-  transition: top 300ms ease-out, right 300ms ease-out, opacity 300ms ease-out;
+  cursor: pointer;
 }
 
+.App__play-profile--btn--triangle {
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 30px solid #1a1a1d;
+}
+
+.App__view-profile--wrapper {
+  position: relative;
+  left: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 260px;
+  height: 110px;
+  background-color: #c7dddd;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.App__list-number {
+  display: flex;
+  margin-top: auto;
+  width: 300px;
+}
+
+.App__list-number--wrapper {
+  list-style-type: none;
+}
+
+.App__list-number--item {
+  display: flex;
+  flex-direction: column;
+  padding-left: 80px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.App__list-number--link {
+  position: relative;
+  width: 300px;
+  padding-bottom: 40px;
+  color: #1a1a1d;
+  text-decoration: none;
+}
+
+.App__list-number--link--active {
+  position: relative;
+  width: 300px;
+  padding-bottom: 40px;
+  color: #1a1a1d;
+  text-decoration: none;
+}
+
+.App__list-number--link--active::after {
+  position: absolute;
+  left: calc(100% - 100px);
+  top: 12px;
+  content: "";
+  background-color: #1a1a1d;
+  width: 55px;
+  height: 2px;
+}
+
+@keyframes line {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 62px;
+  }
+}
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    width: 700px;
+  }
+}
 /*# sourceMappingURL=App.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.css.map */
+
+/*# sourceMappingURL=app.css.map */

@@ -12,7 +12,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sass": "sass --watch src\\App.scss:src\\App.css"
+    "sass": "sass --watch .:."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +30,7 @@
     ]
   },
   "devDependencies": {
+    "prettier": "1.19.1",
     "react-router-dom": "^5.1.2",
     "sass": "^1.23.7"
   }

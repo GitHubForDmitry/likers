@@ -1,0 +1,7 @@
+$lightblue: #c7dddd;
+$black: #1a1a1d;
+@mixin displayFlexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
