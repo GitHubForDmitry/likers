@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import Likers from "../../media/LIKERS.svg";
 import "./Header.css";
 
 // const arr = ['a', 'b', 'c'];
@@ -33,7 +33,7 @@ export default function Header() {
               </div>
             </li>
             <li className="App__item">
-              <Link to="/clients" className="App__link">
+              <Link to="/client/01" className="App__link">
                 Clients
               </Link>
             </li>
@@ -46,7 +46,7 @@ export default function Header() {
         </nav>
         <div className="header__logo">
           <Link to="/" className="App__link">
-            some cool logo
+            <img src={Likers} alt=""/>
           </Link>
         </div>
         <div className="header__search">

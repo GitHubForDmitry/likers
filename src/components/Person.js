@@ -7,7 +7,6 @@ import clientsAPI from "../data/clients";
 import { Link } from "react-router-dom";
 
 const Person = props => {
-  console.log();
   const client = clientsAPI.get(props.match.params.number);
   return (
     <div key={client.id} className="App__container">
