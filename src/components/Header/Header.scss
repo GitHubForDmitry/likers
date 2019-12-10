@@ -1,8 +1,8 @@
 @import "../Mixin";
-
+//# sourceMappingURL=src/components/header/header.map
 .header {
   &__logo {
-    margin-left: 30%;
+    margin-left: 23%;
     @include displayFlexCenter;
   }
   &__search {
@@ -13,7 +13,6 @@
     position: relative;
     border-radius: 50px;
     input[type="text"] {
-      background-color: $lightblue;
       font-family: Raleway, sans-serif;
       font-size: 20px;
       font-weight: bold;
@@ -85,8 +84,7 @@
 }
 
 .menu-burger {
-  cursor: pointer;
-  display: inline-block;
+  z-index: 2;
   &__slice {
     width: 35px;
     height: 5px;
@@ -95,18 +93,25 @@
     transition: 0.4s;
   }
   .active &__slice:nth-child(1) {
-    -webkit-transform: rotate(-45deg) translate(-11px, 6px);
-    transform: rotate(-45deg) translate(-11px, 6px);
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+    transform: rotate(-45deg) translate(-9px, 6px);
+    background-color: #fff;
   }
   .active &__slice:nth-child(2) {
     opacity: 0;
   }
   .active &__slice:nth-child(3) {
-    -webkit-transform: rotate(45deg) translate(-11px, -8px);
-    transform: rotate(45deg) translate(-11px, -8px);
+    -webkit-transform: rotate(45deg) translate(-9px, -8px);
+    transform: rotate(45deg) translate(-9px, -8px);
+    background-color: #fff;
+  }
+  & .active {
+    position: relative;
+    z-index: 2;
+    color: #fff;
   }
 }
-
-h1 {
-  font-size: 12px;
+.display-none {
+  display: none;
 }
+

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Likers from "../../media/LIKERS.svg";
-import "./Header.css";
+import {ReactComponent as HomeIcon} from "../../media/icons/home.svg";
+import {ReactComponent as ContactsIcon} from "../../media/icons/phone-contact.svg";
 
 // const arr = ['a', 'b', 'c'];
 export default function Header() {
-  const [active, setActive] = useState(false);
   const [search, setSearch] = useState("");
+  const [active, setActive] = useState(false);
 
+  const toggleBurger = () => setActive(!active);
   const handleSearch = event => {
     setSearch(event.target.value);
     // setSearch(arr.filter(item => item.join('').toLowerCase().includes(search.toLowerCase())));
@@ -16,16 +18,30 @@ export default function Header() {
   const onHandleSubmit = () => {
     setSearch("");
   };
-  const toggleBurger = () => setActive(!active);
   return (
     <div className="App__container">
       <div className="App__container--wrapper">
+        <nav className={active ? "App__sub-menu" : "display-none" }>
+          <ul className="App__sub-menu__wrapper">
+            <li className="App__sub-menu__item">
+              <Link className="App__sub-menu__link" to="/home">
+                <HomeIcon className="style-icon" /> Home
+              </Link>
+            </li>
+            <li className="App__sub-menu__item">
+              <Link className="App__sub-menu__link" to="/contacts">
+                <ContactsIcon  className="style-icon" />
+                Contacts
+              </Link>
+            </li>
+          </ul>
+        </nav>
         <nav>
           <ul className="App__menu">
             <li className="App__item">
               <div
-                className={active ? "menu-burger active" : "menu-burger"}
-                onClick={toggleBurger}
+                  className={active ? "menu-burger active" : "menu-burger"}
+                  onClick={toggleBurger}
               >
                 <div className="menu-burger__slice"></div>
                 <div className="menu-burger__slice"></div>

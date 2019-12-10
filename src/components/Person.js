@@ -11,6 +11,7 @@ const Person = props => {
   return (
     <div key={client.id} className="App__container">
       <div className="App__container--wrapper">
+        <div className="App__decoration-block"></div>
         <div className="App__social">
           <div className="App__social--wrap">
             <a className="App__social--link" href="#/">
