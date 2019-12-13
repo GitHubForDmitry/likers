@@ -29,7 +29,7 @@
     top: 0;
     right: 0;
     z-index: -1;
-    background-color: $lightblue;
+    background-color: $main;
   }
   &__menu {
     display: flex;
@@ -70,7 +70,7 @@
         fill: $black;
         transition: 0.2s;
         :hover {
-          fill: $lightblue;
+          fill: $main;
           transition: 0.2s;
         }
       }
@@ -170,7 +170,7 @@
       justify-content: center;
       width: 260px;
       height: 110px;
-      background-color: $lightblue;
+      background-color: $main;
       color: #fff;
       text-transform: uppercase;
       font-size: 18px;

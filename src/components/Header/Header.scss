@@ -6,6 +6,7 @@
     @include displayFlexCenter;
   }
   &__search {
+    background-color: transparent; 
     display: flex;
     height: 50px;
     margin-left: auto;

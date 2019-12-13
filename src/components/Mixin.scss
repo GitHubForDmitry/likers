@@ -1,7 +1,30 @@
-$lightblue: #c7dddd;
+$main: #c7dddd;
+$secondary: #e2e8e8;
 $black: #1a1a1d;
+$white: #fff;
 @mixin displayFlexCenter {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin date($color) {
+  color: $color;
+  font-size: 16px;
+}
+
+@mixin text($color, $fs, $colorHover) {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+  justify-content: space-between;
+  max-width: 280px;
+  color: $color;
+  font-size: $fs + px;
+  transition: .2s;
+  font-weight: bold;
+  &:hover {
+    color: $colorHover;
+    transition: .2s;
+  }
 }
