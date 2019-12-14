@@ -612,4 +612,65 @@
   font-size: 16px;
 }
 
+.footer__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__email-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 2px solid #e2e8e8;
+}
+.footer__email-form--wrapper input {
+  padding: 0 50px;
+  outline: none;
+  min-width: 200px;
+  border-width: 0;
+  width: 200px;
+  height: 38px;
+  background-color: #fff;
+}
+.footer__button {
+  outline: none;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.footer__button--disabled {
+  color: #212529;
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+}
+.footer__button--enable {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+  cursor: pointer;
+  border: 1px solid;
+}
+.footer__social {
+  display: flex;
+}
+.footer__social .App__social--link {
+  margin-right: 40px;
+}
+.footer__social .App__social--link:last-child {
+  margin-right: 0px;
+}
+
 /*# sourceMappingURL=App.css.map */

@@ -4,12 +4,11 @@ import Header from "./components/Header/Header";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import News from "./components/News/News";
 import Person from "./components/Person";
-
+import Footer from "./components/Footer/Footer";
 
 function App() {
-
   return (
-    <header className="App">
+    <div className="App">
       <Router>
         <Header />
         <Switch>
@@ -17,7 +16,8 @@ function App() {
           <Route path="/news" component={News} />
         </Switch>
       </Router>
-    </header>
+      <Footer />
+    </div>
   );
 }
 

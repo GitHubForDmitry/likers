@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Likers from "../../media/LIKERS.svg";
+import {ReactComponent as Likers} from "../../media/LIKERS.svg";
 import {ReactComponent as HomeIcon} from "../../media/icons/home.svg";
 import {ReactComponent as ContactsIcon} from "../../media/icons/phone-contact.svg";
 
@@ -20,7 +20,7 @@ export default function Header() {
   };
   return (
     <div className="App__container">
-      <div className="App__container--wrapper">
+      <header className="App__container--wrapper">
         <nav className={active ? "App__sub-menu" : "display-none" }>
           <ul className="App__sub-menu__wrapper">
             <li className="App__sub-menu__item">
@@ -62,7 +62,7 @@ export default function Header() {
         </nav>
         <div className="header__logo">
           <Link to="/" className="App__link">
-            <img src={Likers} alt=""/>
+            <Likers />
           </Link>
         </div>
         <div className="header__search">
@@ -74,7 +74,7 @@ export default function Header() {
           />
           <span onClick={onHandleSubmit}></span>
         </div>
-      </div>
+      </header>
     </div>
   );
 }
