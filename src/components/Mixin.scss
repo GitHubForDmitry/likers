@@ -2,6 +2,11 @@ $main: #c7dddd;
 $secondary: #e2e8e8;
 $black: #1a1a1d;
 $white: #fff;
+$primary: #1da1f2;
+$gridBlock: 300px;
+$gridColGap: 30px;
+$gridRowGap: 30px;
+
 @mixin displayFlexCenter {
   display: flex;
   justify-content: center;

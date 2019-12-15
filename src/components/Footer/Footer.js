@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Likers } from "../../media/LIKERS.svg";
 import { ReactComponent as Facebook } from "../../media/icons/facebook.svg";
@@ -42,13 +42,12 @@ function Footer(props) {
             <div className="footer__email-form--wrapper">
               <input
                 type="email"
-                id="email"
+                id="email-news"
                 name="email"
                 onChange={handleChange}
                 placeholder="Sign up our newsletter"
                 required
                 value={value}
-                formNoValidate={false}
               />
             </div>
             <button
