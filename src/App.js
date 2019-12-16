@@ -10,10 +10,11 @@ import Twitter from "./components/Social/Twitter";
 import Instagram from "./components/Social/Instagram";
 import Footer from "./components/Footer/Footer";
 
-const twitterColor = (opacity = 1) => `rgba(29, 161, 292, ${opacity})`;
-const facebookColor = (opacity = 1) => `rgba(45, 75, 138, ${opacity})`;
-const instagramColor = (opacity = 1) => `rgba(230, 72, 84, ${opacity})`;
+const twitterColor = `rgba(29, 161, 292, 1)`;
+const instagramColor = `rgba(230, 72, 84, 1)`;
+const facebookColor = `rgba(45, 75, 138, 1)`;
 
+const socialColors = [twitterColor, instagramColor, facebookColor];
 function App() {
   const [currentColor, setCurrentColor] = useState('#533737');
   const changeColor = color => {
@@ -23,20 +24,20 @@ function App() {
     <div className="App">
       <Router>
         <header style={{backgroundColor: currentColor}}>
-          <Header />
+          <Header color={socialColors} />
         </header>
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
           <Route path="/contact" component={Contact} />
             <Route exact path="/" render={() => (
-                <Twitter onClick={changeColor(twitterColor())} color={twitterColor}/>
+                <Twitter onClick={changeColor(twitterColor)} color={twitterColor}/>
             )} />
             <Route exact path="/instagram" render={() => (
-                <Instagram onClick={changeColor(instagramColor())} color={instagramColor}/>
+                <Instagram onClick={changeColor(instagramColor)} color={instagramColor}/>
             )} />
             <Route exact path="/facebook" render={() => (
-                <Facebook onClick={changeColor(facebookColor())} color={facebookColor}/>
+                <Facebook onClick={changeColor(facebookColor)} color={facebookColor}/>
             )} />
         </Switch>
       </Router>

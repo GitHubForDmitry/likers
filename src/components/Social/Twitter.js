@@ -54,7 +54,7 @@ const supportApi = [
     text: "We never auto-tweet or ask for your password"
   }
 ];
-function Twitter({color}) {
+function Twitter({ color }) {
   return (
     <div className="App__container">
       <div
@@ -62,19 +62,43 @@ function Twitter({color}) {
         style={{ alignItems: "flex-start" }}
       >
         <section className="social-block">
-          <h1 className="social-block__title">
-            Get Free Twitter Followers using Likers
-          </h1>
-          <p className="social-block__text">
-            Likers enables you to get hundreds of free Twitter followers every
-            day. Enjoy the benefits of more Twitter followers i.e. more audience
-            and more influence, in just 3 steps.
-          </p>
-          <p className="social-block__text">
-            There's no need to buy Twitter followers from other sources when you
-            can get followers for free using Likers
-          </p>
-          <p className="social-block__text--works">Here's how it works:</p>
+          <div className="social-block__wrap">
+            <aside className="main-info">
+              <h1 className="social-block__title">
+                Get Free Twitter Followers using Likers
+              </h1>
+              <p className="social-block__text">
+                Likers enables you to get hundreds of free Twitter followers
+                every day. Enjoy the benefits of more Twitter followers i.e.
+                more audience and more influence, in just 3 steps.
+              </p>
+              <p className="social-block__text">
+                There's no need to buy Twitter followers from other sources when
+                you can get followers for free using Likers
+              </p>
+            </aside>
+            <aside className="support-info">
+              <ul className="support-info__list">
+                <li
+                  style={{ backgroundColor: color }}
+                  className="support-info__title"
+                >
+                  WHY LIKERS FOR FOLLOWERS?
+                </li>
+                {supportApi.map(s => (
+                  <li key={s.id} className="support-info__item">
+                    {s.text}
+                  </li>
+                ))}
+                <li className="support-info__btn-wrapper">
+                  <Link className="support-info__button" to="/signup">
+                    Add your profile now
+                  </Link>
+                </li>
+              </ul>
+            </aside>
+          </div>
+          <h1 className="social-block__text--works">Here's how it works:</h1>
           <div className="social-block__grid">
             {twitterApi.map(twitt => (
               <div key={twitt.id} className="social-block__grid--block">
@@ -98,7 +122,7 @@ function Twitter({color}) {
             Likers provides the safest, the fastest and the natural way to get
             free Twitter followers.
           </div>
-          <div className="support-info__btnfree-wrapper">
+          <div className="support-info__btn-free-wrapper">
             <Link className="support-info__button" to="/signup">
               Join now for free
             </Link>
@@ -110,28 +134,17 @@ function Twitter({color}) {
           <div className="clients">
             {clients.map(client => (
               <div key={client.id} className="clients__wrap">
-                <img className="clients__img" src={require(`../../media/profile/${client.id}.jpg`)}  alt="profile" />
+                <img
+                  className="clients__img"
+                  src={require(`../../media/profile/${client.id}.jpg`)}
+                  alt="profile"
+                />
                 <div className="clients__count">{client.followers}</div>
                 <p className="clients__followers">followers</p>
               </div>
             ))}
           </div>
         </section>
-        <aside className="support-info">
-          <ul className="support-info__list">
-            <li style={{backgroundColor: color}} className="support-info__title">WHY LIKERS FOR FOLLOWERS?</li>
-            {supportApi.map(s => (
-              <li key={s.id} className="support-info__item">
-                {s.text}
-              </li>
-            ))}
-            <li className="support-info__btn-wrapper">
-              <Link className="support-info__button" to="/signup">
-                Add your profile now
-              </Link>
-            </li>
-          </ul>
-        </aside>
       </div>
     </div>
   );

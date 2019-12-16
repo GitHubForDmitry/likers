@@ -5,58 +5,11 @@
     justify-content: space-between;
     align-items: center;
   }
-  &__email-form {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 2px solid $secondary;
-    &--wrapper {
-      input {
-        padding: 0 50px;
-        outline: none;
-        min-width: 200px;
-        border-width: 0;
-        width: 200px;
-        height: 38px;
-        background-color: #fff;
-      }
-    }
-  }
-  &__button {
-    outline: none;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  }
-  &__button--disabled {
-    color: #212529;
-    background-color: #f8f9fa;
-    border: 1px solid #f8f9fa;
-  }
-  &__button--enable {
-    color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    cursor: pointer;
-    border: 1px solid;
-  }
   &__social {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     .App__social--link {
-      margin-right: 40px;
       &:last-child {
         margin-right: 0px;
       }

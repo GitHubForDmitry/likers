@@ -1,0 +1,151 @@
+@media (max-width: 1820px) {
+  .App__container {
+    width: 1400px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .App__container {
+    width: 1024px;
+  }
+  .social-block__grid {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 1044px) {
+  .App__container {
+    width: 768px;
+    &--block {
+      display: block;
+    }
+  }
+  .social-block__wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-block__grid {
+    grid-template-columns: repeat(1, 400px);
+    justify-content: center;
+  }
+
+  .support-info__btn-free-wrapper,
+  .social-block__grid--text-primary,
+  .social-block__text--works
+  {
+    text-align: center;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .App__container {
+    width: 425px;
+  }
+  .social-block__wrap {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .social-block__grid {
+    grid-template-columns: repeat(1, 400px);
+    justify-content: center;
+  }
+  .support-info__btn-free-wrapper {
+    text-align: center;
+  }
+  .social-block__grid--text-primary {
+    text-align: center;
+  }
+  .App__menu {
+    justify-content: space-between;
+    padding: 20px 0;
+    width: 100%;
+  }
+  .App__item {
+    margin-right: 25px;
+    padding-right: 25px;
+  }
+  .header__logo {
+    display: none;
+  }
+  .header__profile {
+    padding: 20px 0;
+
+    &--menu {
+      justify-content: space-between;
+    }
+  }
+  .social-block__title {
+    font-size: 3em;
+  }
+  .social-block__text {
+    font-size: 2em;
+
+    &--works {
+      font-size: 2em;
+    }
+  }
+  .social-block__grid {
+    &--number {
+      width: 70px;
+      height: 70px;
+      font-size: 40px;
+    }
+
+    &--title {
+      font-size: 3em;
+      text-align: center;
+    }
+
+    &--text-primary {
+      font-size: 1.4em;
+    }
+
+    &--text-secondary {
+      font-size: 1.2em;
+    }
+  }
+  .social-block--about {
+    font-size: 1.4em;
+    text-align: center;
+  }
+  .support-info {
+    min-width: 90%;
+    margin: 0 auto;
+    &__title {
+      font-size: 2em;
+    }
+
+    &__item {
+      font-size: 1.4em;
+    }
+
+    &__button {
+      font-size: 1.4em;
+    }
+  }
+  .clients {
+    justify-content: space-evenly;
+    &__wrap {
+      box-sizing: border-box;
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+    &__img {
+      width: 80px;
+      height: 80px;
+  }
+}
+}
+
+@media (max-width: 425px) {
+  .App__container {
+    width: 95%;
+  }
+  .social-block__grid {
+    grid-template-columns: repeat(1, 90%);
+  }
+
+}
