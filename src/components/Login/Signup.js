@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from "react";
+import firebase from "../../firebase/firebase";
 
 const Signup = () => {
   const [nameValue, setNameValue] = useState("");
-  const [value, setValue] = useState(true);
+  const [email, setEmail] = useState(true);
   const [password, setPassword] = useState(true);
   const [passwordConfirm, setPasswordConfirm] = useState(true);
   const [disabled, setDisabled] = useState(true);
+  const [message, setMessage] = useState(true);
   let regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const handleSubmit = event => {
     event.preventDefault();
     setDisabled(true);
-    setValue("");
-    setPassword("");
-    return true;
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
+      })
+      .then(
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            setMessage("Thanks for registration, please login");
+          } else {
+            setMessage("error");
+          }
+        })
+      );
   };
 
   const handleChangeName = event => {
@@ -23,7 +38,7 @@ const Signup = () => {
 
   const handleChange = event => {
     const val = event.target.value;
-    setValue(val);
+    setEmail(val);
   };
 
   const handleChangePassword = event => {
@@ -36,14 +51,20 @@ const Signup = () => {
     setPasswordConfirm(val);
   };
   useEffect(() => {
-    setDisabled(!(
-        (nameValue.length > 2) &&
-        (value.length > 0 && value.match(regEx)) &&
-        (password.length > 5) &&
-        (passwordConfirm.length > 5) &&
-         (password === passwordConfirm && password.length > 0 && password.length > 0 &&password.length === passwordConfirm.length)
-    ))
-  }, [value, regEx, password.length, password, passwordConfirm, nameValue]);
+    setDisabled(
+      !(
+        nameValue.length > 2 &&
+        email.length > 0 &&
+        email.match(regEx) &&
+        password.length > 5 &&
+        passwordConfirm.length > 5 &&
+        password === passwordConfirm &&
+        password.length > 0 &&
+        password.length > 0 &&
+        password.length === passwordConfirm.length
+      )
+    );
+  }, [email, regEx, password.length, password, passwordConfirm, nameValue]);
   return (
     <div className="App__container">
       <div className="login">
@@ -98,7 +119,7 @@ const Signup = () => {
             />
           </div>
           <div className="login__wrapper">
-            <label className="login__label"/>
+            <label className="login__label" />
             <button
               type="submit"
               className={
@@ -111,6 +132,7 @@ const Signup = () => {
             </button>
           </div>
         </form>
+        <p style={{ color: "green" }}>{message}</p>
       </div>
     </div>
   );

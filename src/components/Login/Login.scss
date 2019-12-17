@@ -34,7 +34,6 @@
       margin-bottom: 30px;
       display: flex;
       justify-content: flex-start;
-      align-items: center;
       align-items: flex-start;
       width: 20%;
       textarea {
@@ -46,26 +45,25 @@
     }
     & select {
       font-size: 18px;
-      min-width: 75%;
-      height: 44px;
+      min-width: 300px;
+      height: 45px;
     }
   }
   &__input {
     font-family: Arial, Helvetica, sans-serif, tahoma, verdana;
     color: #333333;
-    font-size: 12px;
     padding: 6px;
     border: 1px solid #b0b0b0;
     background: #ffffff;
     font-weight: normal;
-    max-width: 95%;
-    min-width: 70%;
+    min-width: 300px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     outline: none;
-    height: 30px;
+    height: 45px;
     font-size: 18px;
+    box-sizing: border-box;
   }
   &__button--enable {
     display: inline-block;

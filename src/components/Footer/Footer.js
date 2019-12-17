@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Likers } from "../../media/LIKERS.svg";
 import { ReactComponent as Facebook } from "../../media/icons/facebook.svg";

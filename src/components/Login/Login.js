@@ -1,24 +1,48 @@
 import React, { useState, useEffect } from "react";
+import firebase from '../../firebase/firebase';
 
-const Login = () => {
-  const [value, setValue] = useState("");
+const Login = props => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
+  const [error, setErrorState] = useState("");
   let regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const handleSubmit = event => {
     event.preventDefault();
     setDisabled(true);
-    setValue("");
-    setPassword("");
-    console.log(value);
-    console.log(password);
-    return true;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(
+        firebase.auth().onAuthStateChanged(user => {
+          if (user) {
+            setErrorState("userExist");
+          }
+          console.log(user);
+          return false;
+        })
+      )
+      .catch(error => {
+        // Handle Errors here.
+        let errorCode = error.code;
+        console.log(errorCode);
+        switch (errorCode) {
+          case "auth/invalid-email":
+            return setErrorState("The email address is badly formatted.");
+          case "auth/wrong-password":
+            return setErrorState("The password is invalid");
+          case "auth/user-not-found":
+            return setErrorState("There is no such user");
+          default:
+            return setErrorState("error");
+        }
+      });
   };
 
   const handleChange = event => {
     const value = event.target.value;
-    setValue(value);
+    setEmail(value);
   };
   const handleChangePass = event => {
     const value = event.target.value;
@@ -26,8 +50,8 @@ const Login = () => {
   };
 
   useEffect(() => {
-    setDisabled(!(value.match(regEx) && password.length > 5));
-  }, [value, regEx, password.length]);
+    setDisabled(!(email.match(regEx) && password.length > 5));
+  }, [email, regEx, password.length]);
   return (
     <div className="App__container">
       <div className="login">
@@ -69,6 +93,7 @@ const Login = () => {
             >
               login
             </button>
+            <p>{error}</p>
           </div>
         </form>
       </div>

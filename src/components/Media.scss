@@ -37,6 +37,31 @@
     text-align: center;
   }
 
+  .login__wrapper,
+  .login__wrapper--textarea {
+    flex-direction: column;
+    width: auto;
+  }
+  .login__wrapper--textarea {
+    align-items: center;
+  }
+  .login__title {
+    padding: 0 10px;
+  }
+  .login__text {
+    width: auto;
+    padding: 0 10px;
+  }
+  .login__label {
+    margin-right: 0;
+  }
+  .login__wrapper,
+  .login__wrapper--textarea {
+    align-items: flex-start;
+  }
+  .login__wrapper:last-child {
+    margin-left: 100px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -78,10 +103,12 @@
     }
   }
   .social-block__title {
-    font-size: 3em;
+    font-size: 2.5em;
+    text-align: center;
   }
   .social-block__text {
-    font-size: 2em;
+    font-size: 1.8em;
+    text-align: justify;
 
     &--works {
       font-size: 2em;
@@ -116,6 +143,7 @@
     margin: 0 auto;
     &__title {
       font-size: 2em;
+      text-align: center;
     }
 
     &__item {
@@ -126,18 +154,7 @@
       font-size: 1.4em;
     }
   }
-  .clients {
-    justify-content: space-evenly;
-    &__wrap {
-      box-sizing: border-box;
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
-    &__img {
-      width: 80px;
-      height: 80px;
-  }
-}
+
 }
 
 @media (max-width: 425px) {
@@ -147,5 +164,18 @@
   .social-block__grid {
     grid-template-columns: repeat(1, 90%);
   }
-
+  .clients {
+    justify-content: space-evenly;
+    &__wrap {
+      box-sizing: border-box;
+      margin: 10px;
+    }
+    &__img {
+      width: 80px;
+      height: 80px;
+    }
+  }
+  .social-block__grid--text-secondary {
+    text-align: center;
+  }
 }
