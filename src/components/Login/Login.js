@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from "react";
-import firebase from '../../firebase/firebase';
+import firebase from "../../firebase/firebase";
+import useDebounce from "../../debounce/debounce";
 
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [error, setErrorState] = useState("");
+  const [errorEmail, setErrorEmail] = useState(false);
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [errorUser, setErrorUser] = useState(false);
+  const message = {
+    email: "email is not a valid",
+    password: "password cannot be less than 6 characters"
+  };
   let regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+  const btn = (<button
+  onClick={ () =>
+    firebase.auth().signOut().then(function() {
+      console.log('sign out')
+    }).catch(function(error) {
+      // An error happened.
+    })
+  }
+  >
+  sign out
+  </button>)
   const handleSubmit = event => {
     event.preventDefault();
     setDisabled(true);
@@ -17,10 +34,11 @@ const Login = props => {
       .then(
         firebase.auth().onAuthStateChanged(user => {
           if (user) {
-            setErrorState("userExist");
+            props.history.push("/test");
+          } else {
+            return false;
           }
-          console.log(user);
-          return false;
+
         })
       )
       .catch(error => {
@@ -29,13 +47,13 @@ const Login = props => {
         console.log(errorCode);
         switch (errorCode) {
           case "auth/invalid-email":
-            return setErrorState("The email address is badly formatted.");
+            return setErrorUser("The email address is badly formatted.");
           case "auth/wrong-password":
-            return setErrorState("The password is invalid");
+            return setErrorUser("The password is invalid");
           case "auth/user-not-found":
-            return setErrorState("There is no such user");
+            return setErrorUser("There is no such user");
           default:
-            return setErrorState("error");
+            return setErrorUser("error");
         }
       });
   };
@@ -52,6 +70,33 @@ const Login = props => {
   useEffect(() => {
     setDisabled(!(email.match(regEx) && password.length > 5));
   }, [email, regEx, password.length]);
+
+  const debouncedEmail = useDebounce(email, 1500);
+  const debouncedPassword = useDebounce(password, 1500);
+  useEffect(() => {
+    // Make sure we have a value (user has entered something in input)
+    if (debouncedEmail) {
+      // Set isSearching state
+      setErrorEmail(message.email);
+      if (email.match(regEx)) {
+        setErrorEmail("");
+      }
+    }
+    if (debouncedPassword) {
+      setErrorPassword(message.password);
+      if (password.length > 5) {
+        setErrorPassword("");
+      }
+    }
+  }, [
+    debouncedEmail,
+    debouncedPassword,
+    email,
+    message.email,
+    message.password,
+    password.length,
+    regEx
+  ]);
   return (
     <div className="App__container">
       <div className="login">
@@ -61,25 +106,31 @@ const Login = props => {
             <label className="login__label" htmlFor="email">
               Email address
             </label>
-            <input
-              className="login__input"
-              type="text"
-              name="email"
-              id="email"
-              onChange={handleChange}
-            />
+            <div className="login__wrapper--input">
+              <input
+                className="login__input"
+                type="text"
+                name="email"
+                id="email"
+                onChange={handleChange}
+              />
+              <p className="login__error">{errorEmail}</p>
+            </div>
           </div>
           <div className="login__wrapper">
             <label className="login__label" htmlFor="password">
               Password
             </label>
-            <input
-              className="login__input"
-              type="password"
-              name="password"
-              id="password"
-              onChange={handleChangePass}
-            />
+            <div className="login__wrapper--input">
+              <input
+                className="login__input"
+                type="password"
+                name="password"
+                id="password"
+                onChange={handleChangePass}
+              />
+              <p className="login__error">{errorPassword}</p>
+            </div>
           </div>
           <div className="login__wrapper">
             <label className="login__label"></label>
@@ -93,9 +144,13 @@ const Login = props => {
             >
               login
             </button>
-            <p>{error}</p>
+          </div>
+          <div className="login__wrapper">
+            <label className="login__label"></label>
+            <p className="login__error">{errorUser}</p>
           </div>
         </form>
+        {btn}
       </div>
     </div>
   );

@@ -4,7 +4,6 @@
   flex-direction: column;
   &__title {
     font-size: 45px;
-    font-weight: normal;
     margin: 0 0 26px 0;
     padding: 0;
     line-height: 50px;
@@ -25,17 +24,20 @@
     color: $black;
   }
   &__wrapper {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 20%;
+    &--input {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
     &--textarea {
       margin-bottom: 30px;
       display: flex;
       justify-content: flex-start;
       align-items: flex-start;
-      width: 20%;
       textarea {
         height: 100px;
         padding: 10px;
@@ -64,6 +66,7 @@
     height: 45px;
     font-size: 18px;
     box-sizing: border-box;
+    margin-bottom: 10px;
   }
   &__button--enable {
     display: inline-block;
@@ -116,5 +119,10 @@
     font-size: 24px;
     line-height: 150%;
     margin-bottom: 50px;
+  }
+  &__error {
+    color: red;
+    height: 20px;
+    font-size: 18px;
   }
 }

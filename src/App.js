@@ -13,6 +13,7 @@ import Footer from "./components/Footer/Footer";
 const twitterColor = `rgba(29, 161, 292, 1)`;
 const instagramColor = `rgba(230, 72, 84, 1)`;
 const facebookColor = `rgba(45, 75, 138, 1)`;
+const Test = () =>  {return (<h1 style={{fontSize: 55}}>test</h1>)};
 
 const socialColors = [twitterColor, instagramColor, facebookColor];
 function App() {
@@ -33,12 +34,13 @@ function App() {
             <Route exact path="/" render={() => (
                 <Twitter onClick={changeColor(twitterColor)} color={twitterColor}/>
             )} />
-            <Route exact path="/instagram" render={() => (
+            <Route path="/instagram" render={() => (
                 <Instagram onClick={changeColor(instagramColor)} color={instagramColor}/>
             )} />
-            <Route exact path="/facebook" render={() => (
+            <Route path="/facebook" render={() => (
                 <Facebook onClick={changeColor(facebookColor)} color={facebookColor}/>
             )} />
+          <Route path="/test" component={Test}/>
         </Switch>
       </Router>
       <Footer />

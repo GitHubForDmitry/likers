@@ -107,10 +107,10 @@ const Contact = () => {
               placeholder="Write to us"
               name="textarea"
               id="textarea"
-            ></textarea>
+            />
           </div>
           <div className="login__wrapper">
-            <label className="login__label"></label>
+            <label className="login__label"/>
             <button
               type="submit"
               className={
@@ -119,7 +119,7 @@ const Contact = () => {
               onClick={handleSubmit}
               disabled={disabled}
             >
-              login
+              send
             </button>
           </div>
         </form>

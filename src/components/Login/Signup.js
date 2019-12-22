@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import firebase from "../../firebase/firebase";
 
 const Signup = () => {
-  const [nameValue, setNameValue] = useState("");
   const [email, setEmail] = useState(true);
   const [password, setPassword] = useState(true);
   const [passwordConfirm, setPasswordConfirm] = useState(true);
@@ -31,11 +30,6 @@ const Signup = () => {
       );
   };
 
-  const handleChangeName = event => {
-    const val = event.target.value;
-    setNameValue(val);
-  };
-
   const handleChange = event => {
     const val = event.target.value;
     setEmail(val);
@@ -53,7 +47,6 @@ const Signup = () => {
   useEffect(() => {
     setDisabled(
       !(
-        nameValue.length > 2 &&
         email.length > 0 &&
         email.match(regEx) &&
         password.length > 5 &&
@@ -64,24 +57,12 @@ const Signup = () => {
         password.length === passwordConfirm.length
       )
     );
-  }, [email, regEx, password.length, password, passwordConfirm, nameValue]);
+  }, [email, regEx, password.length, password, passwordConfirm]);
   return (
     <div className="App__container">
       <div className="login">
         <h1 className="login__title">Sign Up</h1>
         <form className="login__form">
-          <div className="login__wrapper">
-            <label className="login__label" htmlFor="name">
-              Your name
-            </label>
-            <input
-              className="login__input"
-              type="text"
-              name="name"
-              id="name"
-              onChange={handleChangeName}
-            />
-          </div>
           <div className="login__wrapper">
             <label className="login__label" htmlFor="email">
               Email address
