@@ -14,33 +14,15 @@ const Login = props => {
     password: "password cannot be less than 6 characters"
   };
   let regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const btn = (<button
-  onClick={ () =>
-    firebase.auth().signOut().then(function() {
-      console.log('sign out')
-    }).catch(function(error) {
-      // An error happened.
-    })
-  }
-  >
-  sign out
-  </button>)
-  const handleSubmit = event => {
-    event.preventDefault();
-    setDisabled(true);
+
+  const login = () =>
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(
-        firebase.auth().onAuthStateChanged(user => {
-          if (user) {
-            props.history.push("/test");
-          } else {
-            return false;
-          }
-
+         () => {
+           props.history.push("/test");
         })
-      )
       .catch(error => {
         // Handle Errors here.
         let errorCode = error.code;
@@ -56,6 +38,10 @@ const Login = props => {
             return setErrorUser("error");
         }
       });
+  const handleSubmit = event => {
+    event.preventDefault();
+    setDisabled(true);
+    login();
   };
 
   const handleChange = event => {
@@ -150,7 +136,6 @@ const Login = props => {
             <p className="login__error">{errorUser}</p>
           </div>
         </form>
-        {btn}
       </div>
     </div>
   );

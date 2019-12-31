@@ -1,33 +1,44 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase/firebase";
 
-const Signup = () => {
-  const [email, setEmail] = useState(true);
+const Signup = props => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState(true);
   const [passwordConfirm, setPasswordConfirm] = useState(true);
   const [disabled, setDisabled] = useState(true);
   const [message, setMessage] = useState(true);
-  let regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  const handleSubmit = event => {
-    event.preventDefault();
-    setDisabled(true);
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        // var errorCode = error.code;
-        // var errorMessage = error.message;
+  const regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for this
+    // URL must be whitelisted in the Firebase Console.
+    url: 'https://likers-dc941.firebaseio.com',
+    // This must be true.
+    handleCodeInApp: true,
+    iOS: {
+      bundleId: 'com.example.ios'
+    },
+    android: {
+      packageName: 'com.example.android',
+      installApp: true,
+      minimumVersion: '12'
+    },
+    dynamicLinkDomain: 'http://localhost:3000/'
+  };
+  const signIn = () => firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+      .then(function() {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
+        console.log('ok')
       })
-      .then(
-        firebase.auth().onAuthStateChanged(user => {
-          if (user) {
-            setMessage("Thanks for registration, please login");
-          } else {
-            setMessage("error");
-          }
-        })
-      );
+      .catch(function(error) {
+        console.log(error.message)
+      });
+
+  const handleSubmit = async event => {
+    await event.preventDefault();
+    await signIn();
   };
 
   const handleChange = event => {
