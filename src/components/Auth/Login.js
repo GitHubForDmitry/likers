@@ -15,13 +15,14 @@ const Login = props => {
   };
   let regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const login = () =>
-    firebase
+  const login = async () => {
+    await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(
-         () => {
-           props.history.push("/test");
+         async () => {
+           await props.history.push("/test");
+           await window.location.reload();
         })
       .catch(error => {
         // Handle Errors here.
@@ -37,7 +38,7 @@ const Login = props => {
           default:
             return setErrorUser("error");
         }
-      });
+      })};
   const handleSubmit = event => {
     event.preventDefault();
     setDisabled(true);

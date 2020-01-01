@@ -10,24 +10,6 @@ const Signup = props => {
   const [message, setMessage] = useState(true);
   const regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   let history = useHistory();
-  const initialState = () => window.localStorage.getItem('userName');
-  const [userName, setUserName] = useState(initialState);
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if(user !== null) {
-        user.sendEmailVerification().then(function() {
-          console.log('email sent')
-        }).catch(function(error) {
-          console.log(error.message);
-        });
-      }
-
-      if (user) {
-        setUserName(firebase.auth().currentUser.email);
-        window.localStorage.setItem('userName', firebase.auth().currentUser.email);
-      }
-    });
-  }, []);
 
   const signIn = () =>
       firebase.auth().createUserWithEmailAndPassword(email, password)

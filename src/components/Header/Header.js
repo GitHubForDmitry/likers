@@ -42,16 +42,14 @@ const Header = ({ color }) => {
       if (user) {
         setUserName(firebase.auth().currentUser.email);
         localStorage.setItem('userName', firebase.auth().currentUser.email);
-
         localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
-        console.log('user in')
       } else {
         console.log('user logout now');
         setUserName('');
       }
     });
-  }, []);
-  console.log(emailVerified)
+  }, [emailVerified]);
+
   const btn = <button onClick={handleChange}>sign out</button>;
   return (
     <>
@@ -97,7 +95,7 @@ const Header = ({ color }) => {
         </div>
       </div>
       <div className="App__container">
-        {userName ? (emailVerified) ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : ""}
+        {userName ? (emailVerified === "true") ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : " "}
       </div>
       <div className="navigation">
         <div className="App__container">

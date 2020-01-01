@@ -24,7 +24,6 @@ const socialColors = [twitterColor, instagramColor, facebookColor];
             if (user) {
                 setUserName(firebase.auth().currentUser.email);
                 window.localStorage.setItem('userName', firebase.auth().currentUser.email)
-                console.log('user in')
                 console.log(firebase.auth().currentUser)
             } else {
                 console.log('user logout now')
