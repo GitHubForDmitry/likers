@@ -14,7 +14,6 @@ const Header = ({ color }) => {
   let history = useHistory();
   const localStorage = window.localStorage;
 
-  const [userEmailVerification, setUserEmailVerification] = useState(false);
   const emailVerified = (localStorage.getItem('emailVerified'));
   const logout = async () => {
     await localStorage.removeItem("userName");
@@ -43,7 +42,6 @@ const Header = ({ color }) => {
       if (user) {
         setUserName(firebase.auth().currentUser.email);
         localStorage.setItem('userName', firebase.auth().currentUser.email);
-        setUserEmailVerification(firebase.auth().currentUser.emailVerified);
 
         localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
         console.log('user in')
@@ -52,7 +50,7 @@ const Header = ({ color }) => {
         setUserName('');
       }
     });
-  }, [emailVerified]);
+  }, []);
   console.log(emailVerified)
   const btn = <button onClick={handleChange}>sign out</button>;
   return (
@@ -99,7 +97,7 @@ const Header = ({ color }) => {
         </div>
       </div>
       <div className="App__container">
-        {userName ? (userEmailVerification) ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : ""}
+        {userName ? (emailVerified) ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : ""}
       </div>
       <div className="navigation">
         <div className="App__container">
