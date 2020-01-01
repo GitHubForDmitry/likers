@@ -37,6 +37,7 @@ const Header = ({ color }) => {
   };
   const initialState = () => localStorage.getItem('userName');
   const [userName, setUserName] = useState(initialState);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -51,11 +52,8 @@ const Header = ({ color }) => {
         setUserName('');
       }
     });
-    if(userEmailVerification) {
-      window.location.reload();
-      console.log('work')
-    }
-  }, []);
+  }, [emailVerified]);
+  console.log(emailVerified)
   const btn = <button onClick={handleChange}>sign out</button>;
   return (
     <>
@@ -101,7 +99,7 @@ const Header = ({ color }) => {
         </div>
       </div>
       <div className="App__container">
-        {userName ? (emailVerified === "true") ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : ""}
+        {userName ? (userEmailVerification) ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : ""}
       </div>
       <div className="navigation">
         <div className="App__container">
