@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import firebase from "../../firebase/firebase";
 import { useHistory } from "react-router-dom";
 
-const Signup = props => {
-  const [email, setEmail] = useState('');
+const Signup = () => {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState(true);
   const [passwordConfirm, setPasswordConfirm] = useState(true);
   const [disabled, setDisabled] = useState(true);
@@ -12,23 +12,34 @@ const Signup = props => {
   let history = useHistory();
 
   const signIn = () =>
-      firebase.auth().createUserWithEmailAndPassword(email, password)
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
       .then(history.push("/"))
       .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        if (errorCode == "auth/weak-password") {
+          alert("The password is too weak.");
         } else {
           alert(errorMessage);
         }
         console.log(error);
       });
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    signIn();
+    await signIn();
+
+    await firebase
+      .auth()
+      .currentUser.sendEmailVerification()
+      .then(function() {
+        // Email sent.
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
   };
 
   const handleChange = event => {
