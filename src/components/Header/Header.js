@@ -10,15 +10,20 @@ import { ReactComponent as Instagram } from "../../media/icons/instagram.svg";
 import { ReactComponent as Twitter } from "../../media/icons/twitter.svg";
 import firebase from "../../firebase/firebase";
 
-const Header = ({ color, userLogin }) => {
+const Header = ({ color }) => {
   let history = useHistory();
+  const localStorage = window.localStorage;
+
   const [userEmailVerification, setUserEmailVerification] = useState(false);
-  const emailVerified = (window.localStorage.getItem('emailVerified'));
+  const emailVerified = (localStorage.getItem('emailVerified'));
   const logout = async () => {
-    await window.localStorage.removeItem("userName");
-    await window.localStorage.removeItem("emailForSignIn");
-    await window.localStorage.removeItem("emailVerified");
+    await localStorage.removeItem("userName");
+    await localStorage.removeItem("emailForSignIn");
+    await localStorage.removeItem("emailVerified");
     await history.push("/");
+  };
+  const refreshPage = () => {
+    window.location.reload();
   };
 
   const handleChange = () => {
@@ -30,24 +35,25 @@ const Header = ({ color, userLogin }) => {
         console.log(error.message);
       });
   };
-  const initialState = () => window.localStorage.getItem('userName');
+  const initialState = () => localStorage.getItem('userName');
   const [userName, setUserName] = useState(initialState);
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setUserName(firebase.auth().currentUser.email);
-        window.localStorage.setItem('userName', firebase.auth().currentUser.email);
+        localStorage.setItem('userName', firebase.auth().currentUser.email);
         setUserEmailVerification(firebase.auth().currentUser.emailVerified);
 
-        window.localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
+        localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
         console.log('user in')
       } else {
-        console.log('user logout now')
+        console.log('user logout now');
         setUserName('');
       }
     });
     if(userEmailVerification) {
       window.location.reload();
+      console.log('work')
     }
   }, []);
   const btn = <button onClick={handleChange}>sign out</button>;
@@ -95,7 +101,7 @@ const Header = ({ color, userLogin }) => {
         </div>
       </div>
       <div className="App__container">
-        {userName ? emailVerified ? "" : <p>please, verified your email</p> : ""}
+        {userName ? (emailVerified === "true") ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : ""}
       </div>
       <div className="navigation">
         <div className="App__container">
