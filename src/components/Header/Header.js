@@ -13,21 +13,22 @@ import firebase from "../../firebase/firebase";
 const Header = ({ color, userLogin }) => {
   let history = useHistory();
   const [userEmailVerification, setUserEmailVerification] = useState(false);
-  console.log(userEmailVerification+ 'test')
+  const emailVerified = (window.localStorage.getItem('emailVerified'));
   const logout = async () => {
     await window.localStorage.removeItem("userName");
     await window.localStorage.removeItem("emailForSignIn");
+    await window.localStorage.removeItem("emailVerified");
     await history.push("/");
   };
+
   const handleChange = () => {
     firebase
       .auth()
       .signOut()
       .then(logout)
       .catch(function(error) {
-        console.log(error);
+        console.log(error.message);
       });
-    console.log(userLogin);
   };
   const initialState = () => window.localStorage.getItem('userName');
   const [userName, setUserName] = useState(initialState);
@@ -35,14 +36,19 @@ const Header = ({ color, userLogin }) => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setUserName(firebase.auth().currentUser.email);
-        window.localStorage.setItem('userName', firebase.auth().currentUser.email)
+        window.localStorage.setItem('userName', firebase.auth().currentUser.email);
         setUserEmailVerification(firebase.auth().currentUser.emailVerified);
+
+        window.localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
         console.log('user in')
       } else {
         console.log('user logout now')
         setUserName('');
       }
     });
+    if(userEmailVerification) {
+      window.location.reload();
+    }
   }, []);
   const btn = <button onClick={handleChange}>sign out</button>;
   return (
@@ -87,6 +93,9 @@ const Header = ({ color, userLogin }) => {
             </ul>
           )}
         </div>
+      </div>
+      <div className="App__container">
+        {userName ? emailVerified ? "" : <p>please, verified your email</p> : ""}
       </div>
       <div className="navigation">
         <div className="App__container">
