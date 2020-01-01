@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../../firebase/firebase";
+import { useHistory } from "react-router-dom";
 
 const Signup = props => {
   const [email, setEmail] = useState('');
@@ -8,37 +9,44 @@ const Signup = props => {
   const [disabled, setDisabled] = useState(true);
   const [message, setMessage] = useState(true);
   const regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for this
-    // URL must be whitelisted in the Firebase Console.
-    url: 'https://likers-dc941.firebaseio.com',
-    // This must be true.
-    handleCodeInApp: true,
-    iOS: {
-      bundleId: 'com.example.ios'
-    },
-    android: {
-      packageName: 'com.example.android',
-      installApp: true,
-      minimumVersion: '12'
-    },
-    dynamicLinkDomain: 'http://localhost:3000/'
-  };
-  const signIn = () => firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
-      .then(function() {
-        // The link was successfully sent. Inform the user.
-        // Save the email locally so you don't need to ask the user for it again
-        // if they open the link on the same device.
-        window.localStorage.setItem('emailForSignIn', email);
-        console.log('ok')
-      })
+  let history = useHistory();
+  const initialState = () => window.localStorage.getItem('userName');
+  const [userName, setUserName] = useState(initialState);
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(user) {
+      if(user !== null) {
+        user.sendEmailVerification().then(function() {
+          console.log('email sent')
+        }).catch(function(error) {
+          console.log(error.message);
+        });
+      }
+
+      if (user) {
+        setUserName(firebase.auth().currentUser.email);
+        window.localStorage.setItem('userName', firebase.auth().currentUser.email);
+      }
+    });
+  }, []);
+
+  const signIn = () =>
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(history.push("/"))
       .catch(function(error) {
-        console.log(error.message)
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
       });
 
-  const handleSubmit = async event => {
-    await event.preventDefault();
-    await signIn();
+  const handleSubmit = event => {
+    event.preventDefault();
+    signIn();
   };
 
   const handleChange = event => {

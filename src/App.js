@@ -25,13 +25,12 @@ const socialColors = [twitterColor, instagramColor, facebookColor];
                 setUserName(firebase.auth().currentUser.email);
                 window.localStorage.setItem('userName', firebase.auth().currentUser.email)
                 console.log('user in')
+                console.log(firebase.auth().currentUser)
             } else {
                 console.log('user logout now')
             }
         });
     }, []);
-
-     console.log(localStorage.getItem('userName'));
 
     const [currentColor, setCurrentColor] = useState("#533737");
 

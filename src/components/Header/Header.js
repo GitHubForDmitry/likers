@@ -12,6 +12,8 @@ import firebase from "../../firebase/firebase";
 
 const Header = ({ color, userLogin }) => {
   let history = useHistory();
+  const [userEmailVerification, setUserEmailVerification] = useState(false);
+  console.log(userEmailVerification+ 'test')
   const logout = async () => {
     await window.localStorage.removeItem("userName");
     await window.localStorage.removeItem("emailForSignIn");
@@ -34,6 +36,7 @@ const Header = ({ color, userLogin }) => {
       if (user) {
         setUserName(firebase.auth().currentUser.email);
         window.localStorage.setItem('userName', firebase.auth().currentUser.email)
+        setUserEmailVerification(firebase.auth().currentUser.emailVerified);
         console.log('user in')
       } else {
         console.log('user logout now')
@@ -51,7 +54,8 @@ const Header = ({ color, userLogin }) => {
               <Likers />
             </Link>
           </div>
-          {userName ? (
+          {userName ?
+              (
             <ul className="App__menu">
               <li className="App__item">
                 <h1>{userName}</h1>
