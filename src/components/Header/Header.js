@@ -53,7 +53,7 @@ const Header = ({ color }, props) => {
         setUserName('');
       }
     });
-  }, [emailVerified]);
+  }, [emailVerified, localStorage]);
 
   const btn = <button onClick={handleChange}>sign out</button>;
   return (

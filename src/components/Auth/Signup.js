@@ -7,7 +7,7 @@ const Signup = () => {
   const [password, setPassword] = useState(true);
   const [passwordConfirm, setPasswordConfirm] = useState(true);
   const [disabled, setDisabled] = useState(true);
-  const [message, setMessage] = useState(true);
+  const [message] = useState(true);
   const regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   let history = useHistory();
 
@@ -19,7 +19,7 @@ const Signup = () => {
       .catch(function(error) {
         const errorCode = error.code;
         const errorMessage = error.message;
-        if (errorCode == "auth/weak-password") {
+        if (errorCode === "auth/weak-password") {
           alert("The password is too weak.");
         } else {
           alert(errorMessage);
