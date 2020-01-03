@@ -22,7 +22,6 @@ const Login = props => {
       .then(
          async () => {
            await props.history.push("/test");
-           await window.location.reload();
         })
       .catch(error => {
         // Handle Errors here.

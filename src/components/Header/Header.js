@@ -10,10 +10,10 @@ import { ReactComponent as Instagram } from "../../media/icons/instagram.svg";
 import { ReactComponent as Twitter } from "../../media/icons/twitter.svg";
 import firebase from "../../firebase/firebase";
 
-const Header = ({ color }) => {
+const Header = ({ color }, props) => {
   let history = useHistory();
   const localStorage = window.localStorage;
-
+  const [userEmail, setUserEmail] = useState('')
   const emailVerified = (localStorage.getItem('emailVerified'));
   const logout = async () => {
     await localStorage.removeItem("userName");
@@ -21,9 +21,12 @@ const Header = ({ color }) => {
     await localStorage.removeItem("emailVerified");
     await history.push("/");
   };
-  const refreshPage = () => {
-    window.location.reload();
+
+  const refreshPage = async () => {
+    await window.location.reload();
+    await props.history.push("/test");
   };
+
 
   const handleChange = () => {
     firebase
@@ -43,6 +46,8 @@ const Header = ({ color }) => {
         setUserName(firebase.auth().currentUser.email);
         localStorage.setItem('userName', firebase.auth().currentUser.email);
         localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
+        setUserEmail(firebase.auth().currentUser.emailVerified);
+        console.log(firebase.auth().currentUser.emailVerified)
       } else {
         console.log('user logout now');
         setUserName('');
@@ -95,7 +100,7 @@ const Header = ({ color }) => {
         </div>
       </div>
       <div className="App__container">
-        {userName ? (emailVerified === "true") ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : " "}
+        {userName ? userEmail ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : " "}
       </div>
       <div className="navigation">
         <div className="App__container">
