@@ -49,7 +49,6 @@ const Header = ({ color }, props) => {
         setUserEmail(firebase.auth().currentUser.emailVerified);
         console.log(firebase.auth().currentUser.emailVerified)
       } else {
-        console.log('user logout now');
         setUserName('');
       }
     });
