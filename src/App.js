@@ -1,26 +1,17 @@
 import React from "react";
 import "./App.css";
 import Main from "./layouts";
-import {observer} from "mobx-react";
-import {observable} from "mobx";
-import DevTools from "mobx-react-devtools";
-class Data extends React.Component {
-
-    render() {
-        return (
-            <div>
-                <DevTools />
-               <Main />
-            </div>
-        );
-    }
-};
+import { Provider } from "mobx-react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Stores from './stores';
 
 function App() {
   return (
-    <div className="App">
-      <Data />
-    </div>
+      <Provider {...Stores()}>
+      <Router>
+          <Main />
+      </Router>
+    </Provider>
   );
 }
 
