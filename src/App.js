@@ -1,13 +1,19 @@
 import React from "react";
 import "./App.css";
 import Main from "./layouts";
+import {observer} from "mobx-react";
+import {observable} from "mobx";
+import DevTools from "mobx-react-devtools";
+class Data extends React.Component {
 
-const Data = () => {
-  return (
-    <div>
-      <Main />
-    </div>
-  );
+    render() {
+        return (
+            <div>
+                <DevTools />
+               <Main />
+            </div>
+        );
+    }
 };
 
 function App() {
