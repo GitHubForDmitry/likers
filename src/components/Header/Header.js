@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as Likers } from "../../media/LIKERS.svg";
 import { ReactComponent as Mail } from "../../media/icons/envelope.svg";
@@ -9,12 +9,16 @@ import { ReactComponent as Facebook } from "../../media/icons/facebook.svg";
 import { ReactComponent as Instagram } from "../../media/icons/instagram.svg";
 import { ReactComponent as Twitter } from "../../media/icons/twitter.svg";
 import firebase from "../../firebase/firebase";
+import UserLogin from "../UserLogin";
+import UserFacebook from "../UserLogin/UserFacebook";
+import UserInstagram from "../UserLogin/UserInstagram";
+import UserTwitter from "../UserLogin/UserTwitter";
 
-const Header = ({ color }, props) => {
+const Header = ({ color, currentColor }, props) => {
   let history = useHistory();
   const localStorage = window.localStorage;
-  const [userEmail, setUserEmail] = useState('')
-  const emailVerified = (localStorage.getItem('emailVerified'));
+  const [userEmail, setUserEmail] = useState("");
+  const emailVerified = localStorage.getItem("emailVerified");
   const logout = async () => {
     await localStorage.removeItem("userName");
     await localStorage.removeItem("emailForSignIn");
@@ -24,9 +28,8 @@ const Header = ({ color }, props) => {
 
   const refreshPage = async () => {
     await window.location.reload();
-    await props.history.push("/test");
+    await props.history.push("/user");
   };
-
 
   const handleChange = () => {
     firebase
@@ -37,19 +40,21 @@ const Header = ({ color }, props) => {
         console.log(error.message);
       });
   };
-  const initialState = () => localStorage.getItem('userName');
+  const initialState = () => localStorage.getItem("userName");
   const [userName, setUserName] = useState(initialState);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         setUserName(firebase.auth().currentUser.email);
-        localStorage.setItem('userName', firebase.auth().currentUser.email);
-        localStorage.setItem('emailVerified', firebase.auth().currentUser.emailVerified);
+        localStorage.setItem("userName", firebase.auth().currentUser.email);
+        localStorage.setItem(
+          "emailVerified",
+          firebase.auth().currentUser.emailVerified
+        );
         setUserEmail(firebase.auth().currentUser.emailVerified);
-        console.log(firebase.auth().currentUser.emailVerified)
       } else {
-        setUserName('');
+        setUserName("");
       }
     });
   }, [emailVerified, localStorage]);
@@ -57,81 +62,113 @@ const Header = ({ color }, props) => {
   const btn = <button onClick={handleChange}>sign out</button>;
   return (
     <>
-      <div className="App__container">
-        <div className="App__container--wrapper">
-          <div className="header__logo">
-            <Link to="/" className="App__link">
-              <Likers />
-            </Link>
-          </div>
-          {userName ?
-              (
-            <ul className="App__menu">
-              <li className="App__item">
-                <h1>{userName}</h1>
-              </li>
-              <li className="App__item">{btn}</li>
-              <li className="App__item">
-                <Link to="/contact" className="App__link">
-                  <Mail className="style-icon" />
-                </Link>
-              </li>
-            </ul>
-          ) : (
-            <ul className="App__menu">
-              <li className="App__item">
-                <Link to="/login" className="App__link">
-                  <Login className="style-icon" />
-                </Link>
-              </li>
-              <li className="App__item">
-                <Link to="/signup" className="App__link">
-                  <Signup className="style-icon" />
-                </Link>
-              </li>
-              <li className="App__item">
-                <Link to="/contact" className="App__link">
-                  <Mail className="style-icon" />
-                </Link>
-              </li>
-            </ul>
-          )}
-        </div>
-      </div>
-      <div className="App__container">
-        {userName ? userEmail ? "" : <p>please, verified your email and <button onClick={refreshPage}>refresh page</button></p> : " "}
-      </div>
-      <div className="navigation">
+      <header style={{ backgroundColor: currentColor }}>
         <div className="App__container">
           <div className="App__container--wrapper">
-            <nav className="header__profile">
-              <ul className="header__profile--menu">
-                <li className="header__profile--item">
-                  <Link className="header__profile--link" to="/">
-                    <Twitter
-                      style={{ fill: color[0], width: 60, height: 60 }}
-                    />
-                  </Link>
+            <div className="header__logo">
+              {emailVerified ? (
+                <Link to="/user" className="App__link">
+                  {" "}
+                  <Likers />
+                </Link>
+              ) : (
+                <Link to="/" className="App__link">
+                  {" "}
+                  <Likers />
+                </Link>
+              )}
+            </div>
+            {userName ? (
+              <ul className="App__menu">
+                <li className="App__item">
+                  <h1>{userName}</h1>
                 </li>
-                <li className="header__profile--item">
-                  <Link className="header__profile--link" to="instagram">
-                    <Instagram
-                      style={{ fill: color[1], width: 60, height: 60 }}
-                    />
-                  </Link>
-                </li>
-                <li className="header__profile--item">
-                  <Link className="header__profile--link" to="facebook">
-                    <Facebook
-                      style={{ fill: color[2], width: 60, height: 60 }}
-                    />
+                <li className="App__item">{btn}</li>
+                <li className="App__item">
+                  <Link to="/contact" className="App__link">
+                    <Mail className="style-icon" />
                   </Link>
                 </li>
               </ul>
-            </nav>
+            ) : (
+              <ul className="App__menu">
+                <li className="App__item">
+                  <Link to="/login" className="App__link">
+                    <Login className="style-icon" />
+                  </Link>
+                </li>
+                <li className="App__item">
+                  <Link to="/signup" className="App__link">
+                    <Signup className="style-icon" />
+                  </Link>
+                </li>
+                <li className="App__item">
+                  <Link to="/contact" className="App__link">
+                    <Mail className="style-icon" />
+                  </Link>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
-      </div>
+        <div className="App__container">
+          {userName ? (
+            userEmail ? (
+              ""
+            ) : (
+              <p>
+                please, verified your email and{" "}
+                <button onClick={refreshPage}>refresh page</button>
+              </p>
+            )
+          ) : (
+            " "
+          )}
+        </div>
+      </header>
+
+      {userName ? (
+        <div className="wrapper-user-login">
+          <UserLogin />
+          <Switch>
+            <Route path="/user/facebook" component={UserFacebook} />
+            <Route path="/user/instagram" component={UserInstagram} />
+            <Route path="/user" component={UserTwitter} />
+          </Switch>
+        </div>
+      ) : (
+        <div className="navigation">
+          <div className="App__container">
+            <div className="App__container--wrapper">
+              <nav className="header__profile">
+                <ul className="header__profile--menu">
+                  <li className="header__profile--item">
+                    <Link className="header__profile--link" to="/">
+                      <Twitter
+                        style={{ fill: color[0], width: 60, height: 60 }}
+                      />
+                    </Link>
+                  </li>
+                  <li className="header__profile--item">
+                    <Link className="header__profile--link" to="instagram">
+                      <Instagram
+                        style={{ fill: color[1], width: 60, height: 60 }}
+                      />
+                    </Link>
+                  </li>
+                  <li className="header__profile--item">
+                    <Link className="header__profile--link" to="facebook">
+                      <Facebook
+                        style={{ fill: color[2], width: 60, height: 60 }}
+                      />
+                    </Link>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

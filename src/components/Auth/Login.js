@@ -21,7 +21,7 @@ const Login = props => {
       .signInWithEmailAndPassword(email, password)
       .then(
          async () => {
-           await props.history.push("/test");
+           await props.history.push("/user");
         })
       .catch(error => {
         // Handle Errors here.
