@@ -31,7 +31,7 @@ function SimpleTabs({
     setValue(inp);
   };
   const points = value * valueInp;
-  setPostQuery(label, points);
+  setPostQuery("Points", points);
   return (
     <Paper square>
       <Tabs
@@ -41,10 +41,10 @@ function SimpleTabs({
         onChange={handleChange}
 
       >
-        <Tab style={{ display: "none" }} value="" />
-        <Tab label="Slow" value={8 || ""} />
-        <Tab label="Normal" value={10 || ""} />
-        <Tab label="Fast" value={14 || ""} />
+        <Tab style={{ display: "none" }} value={value} />
+        <Tab label="Slow" value={8} />
+        <Tab label="Normal" value={10} />
+        <Tab label="Fast" value={14} />
       </Tabs>
       <form>
         <TextField

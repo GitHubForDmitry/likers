@@ -34,8 +34,8 @@ const TextForm = ({ name, setPostQuery, label }) => {
     const val = e.target.value;
     setValue(val);
     setError(!validURL(val));
-    setPostQuery(label, val);
   };
+  setPostQuery(label, value);
   return (
     <FormControl className={classes.formControl} noValidate autoComplete="off">
       <TextField

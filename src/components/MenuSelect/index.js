@@ -20,19 +20,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MenuSelect({ items, label, setPostQuery, postQuery }) {
+function MenuSelect({ items, label, setPostQuery }) {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [error, setError] = React.useState(false);
-
   const handleChange = event => {
     const val = event.target.value;
     setAge(val);
-
-    setPostQuery(label, val.toLowerCase());
   };
-
+  setPostQuery(`Select${label}`, age.toLowerCase());
   const handleClose = () => {
     setOpen(false);
   };

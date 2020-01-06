@@ -16,14 +16,20 @@ const useStyles = makeStyles(theme => ({
 
 function OutlinedButtons({postQuery}) {
     const classes = useStyles();
+    const [error, setError] = React.useState(false);
     const handleSubmit = () => {
         let query = "";
         for (let [key, value] of Object.entries(postQuery)) {
             query = query
                 ? query.concat("", `&${key}=${value}`)
                 : query.concat("", `${key}=${value}`);
+            console.log(value);
+            if(value === "" && key !== 'Comments') {
+                console.log('work');
+                setError(true);
+            }
         }
-        // setIsLoading(true);
+
         console.log(query);
     };
     return (
@@ -31,6 +37,7 @@ function OutlinedButtons({postQuery}) {
             <Button variant="contained" color="primary" onClick={handleSubmit}>
                 Send
             </Button>
+            {error && <h1 style={{color: "red"}}>test</h1>}
         </div>
     );
 }
