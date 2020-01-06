@@ -6,10 +6,18 @@ import {
 
 
 class ViewModeStore {
-  val = '';
+
+  postQuery = {};
+
+  optMessenger = [];
+  isMsgSet = false;
+
+  setMessengerOpt(value) {
+    this.optMessenger = [...value];
+  }
 
   handleChange = (event) => {
-    this.val = event.target.value;
+    return event.target.value;
   };
   handleChangeCount = (event) => {
     return event.target.value;
@@ -17,13 +25,22 @@ class ViewModeStore {
   handleChangePoints = (event) => {
     return event.target.value;
   };
+
+  setPostQuery(name, value) {
+    this.postQuery = {
+      ...this.postQuery,
+      [name]: value
+    };
+  }
 }
+
 
 decorate(ViewModeStore, {
   handleChangePoints : action.bound,
   handleChangeCount : action.bound,
   handleChange: action.bound,
-
+  setPostQuery: action.bound,
+  postQuery: observable,
 });
 
 export default () => new ViewModeStore();
