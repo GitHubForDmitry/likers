@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -46,7 +47,7 @@ export default function MenuSelect({items, label}) {
                     value={age}
                     onChange={handleChange}
                 >
-                    {items.map((item, index) => (<MenuItem key={index} value={index + 1}>{item}</MenuItem>))}
+                    {items.map((item, index) => (<Link to={`/user/${item.toLowerCase()}`}><MenuItem key={index} value={index + 1}>{item}</MenuItem></Link>))}
                 </Select>
             </FormControl>
         </div>
