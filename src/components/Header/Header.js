@@ -131,8 +131,6 @@ const Header = ({ color, currentColor }, props) => {
         <div className="wrapper-user-login">
           <UserLogin />
           <Switch>
-            <Route path="/user/facebook" component={UserFacebook} />
-            <Route path="/user/instagram" component={UserInstagram} />
             <Route path="/user" component={UserTwitter} />
           </Switch>
         </div>

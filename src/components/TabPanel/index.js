@@ -7,13 +7,13 @@ import { inject, observer } from "mobx-react";
 import { compose, withProps } from "recompose";
 
 import { STORE_KEYS } from "../../stores";
+import TypographyVariants from "../../Typography";
 
 function SimpleTabs({
   handleChange,
   handleChangeCount,
   handleChangePoints,
-  label,
-  setPostQuery
+                      setIsPointSelected
 }) {
   const [value, setValue] = React.useState("");
   const [valueInp, setValueInp] = React.useState("");
@@ -31,7 +31,7 @@ function SimpleTabs({
     setValue(inp);
   };
   const points = value * valueInp;
-  setPostQuery("Points", points);
+  setIsPointSelected((points === 0));
   return (
     <Paper square>
       <Tabs
@@ -59,7 +59,7 @@ function SimpleTabs({
           value={valueInp}
           onChange={handleChangeCount}
         />
-        <h1>{points}</h1>
+        <TypographyVariants points={points} />
       </form>
     </Paper>
   );
@@ -74,13 +74,15 @@ export default compose(
         handleChange,
         handleChangeCount,
         handleChangePoints,
-        setPostQuery
+        setPostQuery,
+        setIsPointSelected
       }
     }) => ({
       handleChange,
       handleChangeCount,
       handleChangePoints,
-      setPostQuery
+      setPostQuery,
+      setIsPointSelected
     })
   )
 )(SimpleTabs);

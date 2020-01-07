@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TextForm = ({ name, setPostQuery, label }) => {
+const TextForm = ({ name, setPostQuery, label, setIsUrlSelected, error  }) => {
   const validURL = str => {
     const pattern = new RegExp(
       "^(https?:\\/\\/)?" + // protocol
@@ -28,13 +28,15 @@ const TextForm = ({ name, setPostQuery, label }) => {
   };
   const classes = useStyles();
   const [value, setValue] = React.useState("");
-  const [error, setError] = React.useState(false);
 
   const handleChange = e => {
     const val = e.target.value;
     setValue(val);
-    setError(!validURL(val));
   };
+  if(validURL(value)) {
+    setIsUrlSelected(false);
+  }
+
   setPostQuery(label, value);
   return (
     <FormControl className={classes.formControl} noValidate autoComplete="off">
@@ -53,7 +55,7 @@ const TextForm = ({ name, setPostQuery, label }) => {
 export default compose(
   inject(STORE_KEYS.VIEWMODESTORE),
   observer,
-  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery } }) => ({
-    setPostQuery
+  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery, setIsUrlSelected } }) => ({
+    setPostQuery, setIsUrlSelected
   }))
 )(TextForm);
