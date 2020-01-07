@@ -20,14 +20,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function MenuSelect({ items, label, setPostQuery }) {
+function MenuSelect({ items, label, setPostQuery, isMessengerSelected, setIsMessengerSelected, error }) {
   const classes = useStyles();
   const [age, setAge] = React.useState("");
   const [open, setOpen] = React.useState(false);
-  const [error, setError] = React.useState(false);
+  console.log(isMessengerSelected);
   const handleChange = event => {
     const val = event.target.value;
     setAge(val);
+    setIsMessengerSelected(!val)
   };
   setPostQuery(`Select${label}`, age.toLowerCase());
   const handleClose = () => {
@@ -54,7 +55,7 @@ function MenuSelect({ items, label, setPostQuery }) {
           {items.map((item, index) => (
             <MenuItem key={index} value={item}>
               <Link
-                style={{ textDecoration: "none", color: "inherit" }}
+                style={{ textDecoration: "none", color: "inherit", width: "100%", height: "100%" }}
                 to={`/user/${item.toLowerCase()}`}
               >
                 {item}
@@ -70,7 +71,7 @@ function MenuSelect({ items, label, setPostQuery }) {
 export default compose(
   inject(STORE_KEYS.VIEWMODESTORE),
   observer,
-  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery } }) => ({
-    setPostQuery
+  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery, isMessengerSelected, setIsMessengerSelected} }) => ({
+    setPostQuery, isMessengerSelected, setIsMessengerSelected
   }))
 )(MenuSelect);

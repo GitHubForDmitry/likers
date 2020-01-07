@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
@@ -14,30 +14,26 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function OutlinedButtons({postQuery}) {
+function OutlinedButtons({postQuery, setIsMessengerSelected}) {
     const classes = useStyles();
-    const [error, setError] = React.useState(false);
+    let query = "";
     const handleSubmit = () => {
-        let query = "";
         for (let [key, value] of Object.entries(postQuery)) {
             query = query
                 ? query.concat("", `&${key}=${value}`)
                 : query.concat("", `${key}=${value}`);
-            console.log(value);
-            if(value === "" && key !== 'Comments') {
-                console.log('work');
-                setError(true);
-            }
-        }
 
+        }
         console.log(query);
+        console.log(!!(query.indexOf('SelectMessenger=&') + 1));
+        setIsMessengerSelected(!!(query.indexOf('SelectMessenger=&') + 1));
     };
+
     return (
         <div className={classes.root}>
-            <Button variant="contained" color="primary" onClick={handleSubmit}>
+            <Button variant="contained" color="primary" onClick={handleSubmit} >
                 Send
             </Button>
-            {error && <h1 style={{color: "red"}}>test</h1>}
         </div>
     );
 }
@@ -46,8 +42,8 @@ export default compose(
     inject(STORE_KEYS.VIEWMODESTORE),
     observer,
     withProps(
-        ({ [STORE_KEYS.VIEWMODESTORE]: { postQuery } }) => ({
-            postQuery
+        ({ [STORE_KEYS.VIEWMODESTORE]: { postQuery, setIsMessengerSelected, isMessengerSelected } }) => ({
+            postQuery, setIsMessengerSelected, isMessengerSelected
         })
     )
 )(OutlinedButtons);

@@ -27,13 +27,13 @@ export default compose(
     observer,
     withProps(
         ({
-             [STORE_KEYS.VIEWMODESTORE]: { optDistricts, isDsSet, setBuildingOpt, setIsDistrictSelected, isGradeSelected }
+             [STORE_KEYS.VIEWMODESTORE]: { optDistricts, isDsSet, setBuildingOpt, setIsDistrictSelected, isMessengerSelected }
          }) => ({
             optDistricts,
             isDsSet,
             setBuildingOpt,
             setIsDistrictSelected,
-            isGradeSelected
+            isMessengerSelected
         })
     )
 )(UserFacebook);

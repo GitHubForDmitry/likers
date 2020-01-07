@@ -12,6 +12,18 @@ class ViewModeStore {
   optMessenger = [];
   isMsgSet = false;
 
+  isMessengerSelected = false;
+
+  isActionSelected = false;
+
+  setIsMessengerSelected = (value) => {
+    this.isMessengerSelected = value;
+  };
+
+  setIsActionSelected = (value) => {
+    this.isActionSelected = value;
+  };
+
   setMessengerOpt(value) {
     this.optMessenger = [...value];
   }
@@ -41,6 +53,10 @@ decorate(ViewModeStore, {
   handleChange: action.bound,
   setPostQuery: action.bound,
   postQuery: observable,
+  isMessengerSelected: observable,
+  isActionSelected: observable,
+  setIsMessengerSelected: action,
+  setIsActionSelected: action
 });
 
 export default () => new ViewModeStore();
