@@ -20,6 +20,10 @@ class ViewModeStore {
 
   isPointSelected = false;
 
+  isUserName = '';
+
+  setIsUserName = (value) => this.isUserName = value;
+
   setIsMessengerSelected = (value) => {
     this.isMessengerSelected = value;
   };
@@ -69,10 +73,12 @@ decorate(ViewModeStore, {
   isActionSelected: observable,
   isUrlSelected: observable,
   isPointSelected: observable,
+  isUserName: observable,
   setIsMessengerSelected: action.bound,
   setIsActionSelected: action.bound,
   setIsUrlSelected: action.bound,
-  setIsPointSelected: action.bound
+  setIsPointSelected: action.bound,
+  setIsUserName: action.bound
 });
 
 export default () => new ViewModeStore();

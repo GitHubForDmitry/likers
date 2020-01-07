@@ -10,8 +10,6 @@ import { ReactComponent as Instagram } from "../../media/icons/instagram.svg";
 import { ReactComponent as Twitter } from "../../media/icons/twitter.svg";
 import firebase from "../../firebase/firebase";
 import UserLogin from "../UserLogin";
-import UserFacebook from "../UserLogin/UserFacebook";
-import UserInstagram from "../UserLogin/UserInstagram";
 import UserTwitter from "../UserLogin/UserTwitter";
 
 const Header = ({ color, currentColor }, props) => {

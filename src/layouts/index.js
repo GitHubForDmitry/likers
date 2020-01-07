@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import firebase from "firebase";
 import Header from "../components/Header/Header";
 import { Route, Switch} from "react-router-dom";
@@ -10,7 +10,7 @@ import Instagram from "../components/Social/Instagram";
 import Facebook from "../components/Social/Facebook";
 import Footer from "../components/Footer/Footer";
 
-const Main = () => {
+const Main = memo(() => {
   const initialState = () => window.localStorage.getItem("userName");
   const twitterColor = `rgba(29, 161, 292, 1)`;
   const instagramColor = `rgba(230, 72, 84, 1)`;
@@ -79,5 +79,5 @@ const Main = () => {
       <Footer />
     </div>
   );
-};
+});
 export default Main;

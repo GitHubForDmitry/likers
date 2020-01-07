@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { compose, withProps } from "recompose";
 import { inject, observer } from "mobx-react";
