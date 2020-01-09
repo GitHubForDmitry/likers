@@ -25,7 +25,7 @@ const UserTwitter = ({isMessengerSelected, isActionSelected, isUrlSelected}) => 
             />
             <TextForm name="text" label="Url" error={isUrlSelected}/>
             <SimpleTabs slow={8} normal={10} fast={14} name="points" label="Points" />
-            {commentsUrl === "/user/comment" && <TodoApp />}
+            {/*{commentsUrl === "/user/comment" && <TodoApp />}*/}
             <ButtonIcon name="points" label="points" />
         </div>
     );

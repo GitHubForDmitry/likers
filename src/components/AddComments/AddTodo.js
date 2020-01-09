@@ -1,5 +1,8 @@
 import React, { memo } from "react";
-import { TextField, Paper, Button, Grid } from "@material-ui/core";
+import TextField from '@material-ui/core/TextField';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 const AddTodo = memo(props => (
     <Paper style={{ margin: 16, padding: 16 }}>

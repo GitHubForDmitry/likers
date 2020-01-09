@@ -3,7 +3,7 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {compose, withProps} from "recompose";
 import {inject, observer} from "mobx-react";
-import {STORE_KEYS} from "../stores";
+import {STORE_KEYS} from "../../stores";
 
 const theme = createMuiTheme({
     typography: {

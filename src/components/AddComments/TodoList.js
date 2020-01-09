@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import { List, Paper } from "@material-ui/core";
-
+import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
 import TodoListItem from "./TodoListItem";
 
 const TodoList = memo(props => (

@@ -9,6 +9,8 @@ import Twitter from "../components/Social/Twitter";
 import Instagram from "../components/Social/Instagram";
 import Facebook from "../components/Social/Facebook";
 import Footer from "../components/Footer/Footer";
+import Pricing from "../components/Pricing";
+import Features from "../components/Features";
 
 const Main = memo(() => {
   const initialState = () => window.localStorage.getItem("userName");
@@ -46,13 +48,14 @@ const Main = memo(() => {
             userName && userName.substring(0, userName.lastIndexOf("@"))
           }
         />
+        <Features/>
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/contact" component={Contact} />
         <Route
           exact
-          path="/"
+          path="/twitter"
           render={() => (
             <Twitter onClick={changeColor(twitterColor)} color={twitterColor} />
           )}
@@ -76,6 +79,7 @@ const Main = memo(() => {
           )}
         />
       </Switch>
+      <Pricing/>
       <Footer />
     </div>
   );

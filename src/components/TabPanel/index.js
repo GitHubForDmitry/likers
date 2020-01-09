@@ -7,7 +7,7 @@ import { inject, observer } from "mobx-react";
 import { compose, withProps } from "recompose";
 
 import { STORE_KEYS } from "../../stores";
-import TypographyVariants from "../../Typography";
+import TypographyVariants from "../Typography";
 
 function SimpleTabs({
   handleChange,

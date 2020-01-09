@@ -32,7 +32,7 @@
   &__item {
     margin-right: 50px;
     padding-right: 50px;
-    border-right: 1px solid $white;
+    border-right: 1px solid $black;
     &:last-child {
       border-right: none;
       padding-right: 0;
@@ -40,7 +40,7 @@
     }
   }
   &__link {
-    color: $white;
+    color: $black;
 
     font-weight: 700;
     letter-spacing: 0.1em;

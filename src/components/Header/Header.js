@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useLocation  } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as Likers } from "../../media/LIKERS.svg";
 import { ReactComponent as Mail } from "../../media/icons/envelope.svg";
@@ -60,7 +60,7 @@ const Header = ({ color, currentColor }, props) => {
   const btn = <button onClick={handleChange}>sign out</button>;
   return (
     <>
-      <header style={{ backgroundColor: currentColor }}>
+      <header className="header" >
         <div className="App__container">
           <div className="App__container--wrapper">
             <div className="header__logo">
@@ -91,18 +91,28 @@ const Header = ({ color, currentColor }, props) => {
             ) : (
               <ul className="App__menu">
                 <li className="App__item">
+                  <a href="#features" className="App__link">
+                    Features
+                  </a>
+                </li>
+                <li className="App__item">
+                  <a href="#pricing" className="App__link">
+                    Pricing
+                  </a>
+                </li>
+                <li className="App__item">
                   <Link to="/login" className="App__link">
-                    <Login className="style-icon" />
+                    login
                   </Link>
                 </li>
                 <li className="App__item">
                   <Link to="/signup" className="App__link">
-                    <Signup className="style-icon" />
+                    signup
                   </Link>
                 </li>
                 <li className="App__item">
                   <Link to="/contact" className="App__link">
-                    <Mail className="style-icon" />
+                    contact
                   </Link>
                 </li>
               </ul>
@@ -139,7 +149,7 @@ const Header = ({ color, currentColor }, props) => {
               <nav className="header__profile">
                 <ul className="header__profile--menu">
                   <li className="header__profile--item">
-                    <Link className="header__profile--link" to="/">
+                    <Link className="header__profile--link" to="/twitter">
                       <Twitter
                         style={{ fill: color[0], width: 60, height: 60 }}
                       />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../firebase/firebase";
+import firebase from "firebase";
 import { useHistory } from "react-router-dom";
 
 const Signup = () => {
@@ -56,6 +56,23 @@ const Signup = () => {
     const val = event.target.value;
     setPasswordConfirm(val);
   };
+  const handleSubmitGoogle = (event) => {
+    event.preventDefault();
+    if (!firebase.auth().currentUser) {
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      provider.addScope('https://www.googleapis.com/auth/plus.login');
+
+      firebase.auth().signInWithRedirect(provider);
+
+      firebase.auth().getRedirectResult().then(function (authData) {
+        console.log(authData);
+      }).catch(function (error) {
+        console.log(error);
+      });
+    }
+  };
+
   useEffect(() => {
     setDisabled(
       !(
@@ -110,6 +127,17 @@ const Signup = () => {
               id="confirmPassword"
               onChange={handleChangePasswordConfirm}
             />
+          </div>
+          <div className="login__wrapper">
+            <label className="login__label" />
+            <button
+                className={
+                  disabled ? "login__button--disable" : "login__button--enable"
+                }
+                onClick={handleSubmitGoogle}
+            >
+              sign in with google
+            </button>
           </div>
           <div className="login__wrapper">
             <label className="login__label" />

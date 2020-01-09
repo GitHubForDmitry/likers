@@ -1,5 +1,8 @@
 import React, { memo } from "react";
-import { AppBar, Toolbar, Typography, Paper } from "@material-ui/core";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 const Layout = memo(props => (
     <Paper
