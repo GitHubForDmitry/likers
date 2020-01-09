@@ -3,16 +3,56 @@ import { Link, Route, Switch, useLocation  } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { ReactComponent as Likers } from "../../media/LIKERS.svg";
 import { ReactComponent as Mail } from "../../media/icons/envelope.svg";
-import { ReactComponent as Login } from "../../media/icons/login.svg";
-import { ReactComponent as Signup } from "../../media/icons/signup.svg";
-import { ReactComponent as Facebook } from "../../media/icons/facebook.svg";
-import { ReactComponent as Instagram } from "../../media/icons/instagram.svg";
-import { ReactComponent as Twitter } from "../../media/icons/twitter.svg";
+
 import firebase from "../../firebase/firebase";
-import UserLogin from "../UserLogin";
-import UserTwitter from "../UserLogin/UserTwitter";
+
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
+import {makeStyles} from "@material-ui/core/styles";
+import Rocket from '../../media/rocket.png';
+import Instagram from '../../media/instagram.png';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    background: "linear-gradient(-270deg,#27acbd,#5a64af,#a93f7f)",
+    width: "100%",
+    height: "calc(100vh - 150px)"
+  },
+  heroContent: {
+    display: "flex",
+    alignItems: "start",
+    alignContent: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    width: "100%",
+    paddingTop: "10vh",
+    height: "calc(100vh - 150px)",
+    textAlign: "center"
+  },
+  h1: {
+    color: "#fff"
+  },
+  card: {
+    maxWidth: 4345,
+  },
+  media: {
+    height: 140,
+    width: 440
+  },
+  main: {
+    display: "flex",
+    flexDirection: "column",
+    marginRight: 300
+  },
+  mainWrapper: {
+    display: "flex",
+    alignItems: "center"
+  }
+}));
 
 const Header = ({ color, currentColor }, props) => {
+  const classes = useStyles();
   let history = useHistory();
   const localStorage = window.localStorage;
   const [userEmail, setUserEmail] = useState("");
@@ -134,47 +174,22 @@ const Header = ({ color, currentColor }, props) => {
           )}
         </div>
       </header>
+      <CssBaseline />
+      <Container maxWidth="lg" component="main" className={classes.heroContent}>
+        <div className={classes.mainWrapper}>
+        <div className={classes.main}>
+          <Typography component="h2" variant="h2" gutterBottom className={classes.h1}>
+            Welcome to
+          </Typography>
+          <Typography component="h2" variant="h2" gutterBottom className={classes.h1}>
+            LIKERS
+          </Typography>
+        </div>
+          <img style={{width: "20vw", height: "auto"}} src={Instagram}  alt="like" className={classes.main}/>
+        </div>
+        <img style={{width: "auto", height: 200}} src={Rocket}  alt="like" className={classes.main}/>
+      </Container>
 
-      {userName ? (
-        <div className="wrapper-user-login">
-          <UserLogin />
-          <Switch>
-            <Route path="/user" component={UserTwitter} />
-          </Switch>
-        </div>
-      ) : (
-        <div className="navigation">
-          <div className="App__container">
-            <div className="App__container--wrapper">
-              <nav className="header__profile">
-                <ul className="header__profile--menu">
-                  <li className="header__profile--item">
-                    <Link className="header__profile--link" to="/twitter">
-                      <Twitter
-                        style={{ fill: color[0], width: 60, height: 60 }}
-                      />
-                    </Link>
-                  </li>
-                  <li className="header__profile--item">
-                    <Link className="header__profile--link" to="instagram">
-                      <Instagram
-                        style={{ fill: color[1], width: 60, height: 60 }}
-                      />
-                    </Link>
-                  </li>
-                  <li className="header__profile--item">
-                    <Link className="header__profile--link" to="facebook">
-                      <Facebook
-                        style={{ fill: color[2], width: 60, height: 60 }}
-                      />
-                    </Link>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

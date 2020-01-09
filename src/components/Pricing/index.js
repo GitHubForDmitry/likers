@@ -159,7 +159,7 @@ export default function Pricing() {
     return (
 
         <React.Fragment>
-            <Grid id="pricing" container spacing={2} direction="column">
+            <Grid id="pricing" container direction="column">
             <CssBaseline />
             <Container maxWidth="sm" component="main" className={classes.heroContent}>
                 <ToggleButtonGroup
@@ -193,7 +193,6 @@ export default function Pricing() {
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
                     {tiers.map(tier => (
-                        // Enterprise card is full width at sm breakpoint
                         <Grid item key={tier.title} xs={12} sm={tier.title === 'Enterprise' ? 12 : 6} md={4}>
                             <Card>
                                 <CardHeader
@@ -238,7 +237,6 @@ export default function Pricing() {
                                                 </StripeProvider>
                                             </div>
                                         </Modal>
-
                                 </CardActions>
                             </Card>
                         </Grid>
