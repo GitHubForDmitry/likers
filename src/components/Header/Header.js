@@ -148,21 +148,21 @@ const Header = ({ color, currentColor }, props) => {
                     Pricing
                   </a>
                 </li>
-                <li className="App__item">
-                  <Link to="/login" className="App__link">
-                    login
-                  </Link>
-                </li>
-                <li className="App__item">
-                  <Link to="/signup" className="App__link">
-                    signup
-                  </Link>
-                </li>
-                <li className="App__item">
-                  <Link to="/contact" className="App__link">
-                    contact
-                  </Link>
-                </li>
+                {/*<li className="App__item">*/}
+                {/*  <Link to="/login" className="App__link">*/}
+                {/*    login*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
+                {/*<li className="App__item">*/}
+                {/*  <Link to="/signup" className="App__link">*/}
+                {/*    signup*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
+                {/*<li className="App__item">*/}
+                {/*  <Link to="/contact" className="App__link">*/}
+                {/*    contact*/}
+                {/*  </Link>*/}
+                {/*</li>*/}
               </ul>
             )}
           </div>
