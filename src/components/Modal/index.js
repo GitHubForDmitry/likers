@@ -9,7 +9,7 @@ import Stripe from "../../media/stripe.png";
 import TextForm from "../TextForm/TextForm";
 import CheckoutForm from "../Stripe";
 import Modal from "@material-ui/core/Modal";
-import React from "react";
+import React, {useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { compose, withProps } from "recompose";
@@ -50,12 +50,28 @@ function getModalStyle() {
 function ModalWindow({ tier }) {
   const classes = useStyles();
   const [alignment, setAlignment] = React.useState("twitter");
+    function validURL(str) {
+        const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+        return !!pattern.test(str);
+    }
+    function validEmail(mail)
+    {
+        const pattern = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
 
+        return !!pattern.test(mail);
+    }
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [errorUrl, setErrorUrl] = React.useState(false);
+  const [errorEmail, setErrorEmail] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -65,18 +81,21 @@ function ModalWindow({ tier }) {
     setOpen(false);
   };
   const [valueUrl, setValueUrl] = React.useState("");
-  const [valueHttp, setValueHttp] = React.useState("");
+  const [valueEmail, setValueEmail] = React.useState("");
 
   const handleChangeUrl = e => {
     const val = e.target.value;
     setValueUrl(val);
+    setErrorUrl(!validURL(valueUrl));
+
   };
+
   const handleChangeHttp = e => {
     const val = e.target.value;
-    setValueHttp(val);
+    setValueEmail(val);
+    setErrorEmail(!validEmail(valueEmail));
   };
-  console.log(valueUrl);
-  console.log(valueHttp);
+
   return (
     <>
       <Button
@@ -153,11 +172,13 @@ function ModalWindow({ tier }) {
                   label="http://"
                   value={valueUrl}
                   handleChange={e => handleChangeUrl(e)}
+                  error={errorUrl}
                 />
                 <TextForm
                   label="email"
-                  value={valueHttp}
+                  value={valueEmail}
                   handleChange={e => handleChangeHttp(e)}
+                  error={errorEmail}
                 />
               </Container>
               <Elements>
@@ -165,7 +186,7 @@ function ModalWindow({ tier }) {
                   price={tier.price}
                   valueMessenger={alignment}
                   valueUrl={valueUrl}
-                  valueHttp={valueHttp}
+                  valueEmail={valueEmail}
                 />
               </Elements>
             </div>

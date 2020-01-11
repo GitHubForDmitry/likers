@@ -64,7 +64,7 @@ class _CardForm extends React.Component {
                     this.setState({errorMessage: this.state.errorMessage});
                     console.log(this.props.valueMessenger);
                     console.log(this.props. valueUrl);
-                    console.log(this.props. valueHttp);
+                    console.log(this.props. valueEmail);
                 }
                 if (typeof payload.token === "string") {
                     return !this.state.error;
@@ -118,12 +118,12 @@ class Checkout extends React.Component {
 
   render() {
     const { elementFontSize } = this.state;
-    const { price, valueMessenger, valueUrl, valueHttp } = this.props;
+    const { price, valueMessenger, valueUrl, valueEmail } = this.props;
     return (
       <div className="Checkout">
         <h1>Available Elements</h1>
         <Elements>
-          <CardForm price={price} fontSize={elementFontSize} valueMessenger={valueMessenger} valueUrl={valueUrl} valueHttp={valueHttp} />
+          <CardForm price={price} fontSize={elementFontSize} valueMessenger={valueMessenger} valueUrl={valueUrl} valueEmail={valueEmail} />
         </Elements>
       </div>
     );
