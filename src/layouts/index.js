@@ -80,6 +80,7 @@ const Main = memo(() => {
         />
       </Switch>
       <Pricing/>
+      <Footer/>
     </div>
   );
 });

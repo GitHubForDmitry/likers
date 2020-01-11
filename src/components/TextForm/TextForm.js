@@ -46,7 +46,7 @@ const TextForm = ({ name, setPostQuery, label, setIsUrlSelected, error  }) => {
         onChange={handleChange}
         value={value}
         id={name}
-        label={`http://`}
+        label={label}
       />
     </FormControl>
   );

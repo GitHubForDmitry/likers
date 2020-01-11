@@ -43,11 +43,19 @@ const useStyles = makeStyles(theme => ({
   main: {
     display: "flex",
     flexDirection: "column",
-    marginRight: 300
+    textAlign: "center"
   },
   mainWrapper: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+     width: "100%",
+    justifyContent: "space-between",
+  },
+  mainWrapperImg: {
+    display: "flex",
+    alignItems: "center",
+    width: "100%",
+    justifyContent: "center",
   }
 }));
 
@@ -187,7 +195,9 @@ const Header = ({ color, currentColor }, props) => {
         </div>
           <img style={{width: "20vw", height: "auto"}} src={Instagram}  alt="like" className={classes.main}/>
         </div>
+        <div className={classes.mainWrapperImg}>
         <img style={{width: "auto", height: 200}} src={Rocket}  alt="like" className={classes.main}/>
+        </div>
       </Container>
 
     </>

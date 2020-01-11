@@ -20,7 +20,6 @@ import TextForm from "../TextForm/TextForm";
 import Modal from "@material-ui/core/Modal";
 import CheckoutForm from "../Stripe";
 import {Elements, StripeProvider} from 'react-stripe-elements';
-import { NavHashLink as NavLink } from 'react-router-hash-link';
 
 function Copyright() {
     return (
@@ -87,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         position: 'absolute',
-        width: 400,
+        width: 550,
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -113,7 +112,7 @@ const tiers = [
     },
     {
         title: 'Enterprise',
-        price: '',
+        price: 'over 100',
         description: [
             'More then 1000 likes',
             'Progress report per day',
@@ -137,7 +136,6 @@ function getModalStyle() {
 }
 
 export default function Pricing() {
-
     const classes = useStyles();
     const [alignment, setAlignment] = React.useState('left');
 
@@ -155,40 +153,19 @@ export default function Pricing() {
         setOpen(false);
     };
 
-
     return (
 
         <React.Fragment>
             <Grid id="pricing" container direction="column">
             <CssBaseline />
-            <Container maxWidth="sm" component="main" className={classes.heroContent}>
-                <ToggleButtonGroup
-                    value={alignment}
-                    exclusive
-                    onChange={handleAlignment}
-                    aria-label="text alignment"
+                <Typography
+                    component="h2"
+                    variant="h2"
+                    gutterBottom
+                    className={classes.h1}
                 >
-                    <ToggleButton value="twitter" className={classes.button}>
-                    <Twitter
-                        style={{ fill: "rgb(29, 161, 255)", width: 20, height: 20, marginRight: 20 }}
-                    />
-                    Twitter
-                    </ToggleButton>
-                    <ToggleButton value="instagram" className={classes.button}>
-                            <Instagram
-                                style={{ fill: "rgb(230, 72, 84)", width: 20, height: 20, marginRight: 20 }}
-                            />
-                        Instagram
-                    </ToggleButton>
-                    <ToggleButton value="facebook" className={classes.button}>
-                            <Facebook
-                                style={{ fill: "rgb(45, 75, 138)", width: 20, height: 20, marginRight: 20 }}
-                            />
-                        Facebook
-                    </ToggleButton>
-                </ToggleButtonGroup>
-                    <TextForm />
-            </Container>
+                    Pricing
+                </Typography>
             {/* End hero unit */}
             <Container maxWidth="md" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
@@ -230,8 +207,37 @@ export default function Pricing() {
                                             <div style={modalStyle} className={classes.paper}>
                                                 <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
                                                     <div className="example">
+                                                        <Container maxWidth="sm" component="main" className={classes.heroContent}>
+                                                        <ToggleButtonGroup
+                                                            value={alignment}
+                                                            exclusive
+                                                            onChange={handleAlignment}
+                                                            aria-label="text alignment"
+                                                        >
+                                                            <ToggleButton value="twitter" className={classes.button}>
+                                                                <Twitter
+                                                                    style={{ fill: "rgb(29, 161, 255)", width: 20, height: 20, marginRight: 20 }}
+                                                                />
+                                                                Twitter
+                                                            </ToggleButton>
+                                                            <ToggleButton value="instagram" className={classes.button}>
+                                                                <Instagram
+                                                                    style={{ fill: "rgb(230, 72, 84)", width: 20, height: 20, marginRight: 20 }}
+                                                                />
+                                                                Instagram
+                                                            </ToggleButton>
+                                                            <ToggleButton value="facebook" className={classes.button}>
+                                                                <Facebook
+                                                                    style={{ fill: "rgb(45, 75, 138)", width: 20, height: 20, marginRight: 20 }}
+                                                                />
+                                                                Facebook
+                                                            </ToggleButton>
+                                                        </ToggleButtonGroup>
+                                                        <TextForm label="http://"/>
+                                                        <TextForm label="email"/>
+                                                        </Container>
                                                         <Elements>
-                                                            <CheckoutForm />
+                                                            <CheckoutForm price={tiers} />
                                                         </Elements>
                                                     </div>
                                                 </StripeProvider>
