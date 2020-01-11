@@ -1,12 +1,6 @@
-import {
-  decorate,
-  observable,
-  action,
-} from "mobx";
-
+import { decorate, observable, action } from "mobx";
 
 class ViewModeStore {
-
   postQuery = {};
 
   optMessenger = [];
@@ -15,28 +9,30 @@ class ViewModeStore {
   isMessengerSelected = false;
 
   isActionSelected = false;
-  
+
   isUrlSelected = false;
 
   isPointSelected = false;
 
-  isUserName = '';
+  isTextFormValue = "";
 
-  setIsUserName = (value) => this.isUserName = value;
+  handleChangeTextFormValue = value => {
+    this.isTextFormValue = value;
+  };
 
-  setIsMessengerSelected = (value) => {
+  setIsMessengerSelected = value => {
     this.isMessengerSelected = value;
   };
 
-  setIsActionSelected = (value) => {
+  setIsActionSelected = value => {
     this.isActionSelected = value;
   };
 
-  setIsUrlSelected = (value) => {
+  setIsUrlSelected = value => {
     this.isUrlSelected = value;
   };
 
-  setIsPointSelected = (value) => {
+  setIsPointSelected = value => {
     this.isPointSelected = value;
   };
 
@@ -44,13 +40,13 @@ class ViewModeStore {
     this.optMessenger = [...value];
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     return event.target.value;
   };
-  handleChangeCount = (event) => {
+  handleChangeCount = event => {
     return event.target.value;
   };
-  handleChangePoints = (event) => {
+  handleChangePoints = event => {
     return event.target.value;
   };
 
@@ -62,10 +58,9 @@ class ViewModeStore {
   }
 }
 
-
 decorate(ViewModeStore, {
-  handleChangePoints : action.bound,
-  handleChangeCount : action.bound,
+  handleChangePoints: action.bound,
+  handleChangeCount: action.bound,
   handleChange: action.bound,
   setPostQuery: action.bound,
   postQuery: observable,
@@ -74,11 +69,12 @@ decorate(ViewModeStore, {
   isUrlSelected: observable,
   isPointSelected: observable,
   isUserName: observable,
+  isTextFormValue: observable,
   setIsMessengerSelected: action.bound,
   setIsActionSelected: action.bound,
   setIsUrlSelected: action.bound,
   setIsPointSelected: action.bound,
-  setIsUserName: action.bound
+  handleChangeTextFormValue: action.bound
 });
 
 export default () => new ViewModeStore();

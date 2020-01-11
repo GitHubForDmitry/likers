@@ -109,14 +109,14 @@ const tiers = [
   {
     id: 2,
     title: "Enterprise",
-    price: "over 100",
+    price: "100",
     description: [
       "More then 1000 likes",
       "Progress report per day",
       "Phone & email support",
       "Very fast"
     ],
-    buttonText: "Contact us",
+    buttonText: "Get started",
     buttonVariant: "outlined"
   }
 ];
@@ -133,21 +133,7 @@ function getModalStyle() {
 
 export default function Pricing() {
   const classes = useStyles();
-  const [alignment, setAlignment] = React.useState("left");
 
-  const handleAlignment = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <React.Fragment>

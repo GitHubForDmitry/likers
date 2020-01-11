@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
@@ -13,31 +13,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TextForm = ({ name, setPostQuery, label, setIsUrlSelected, error  }) => {
-  const validURL = str => {
-    const pattern = new RegExp(
-      "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    ); // fragment locator
-    return !!pattern.test(str);
-  };
-  const classes = useStyles();
-  const [value, setValue] = React.useState("");
-
-  const handleChange = e => {
-    const val = e.target.value;
-    setValue(val);
-  };
-  if(validURL(value)) {
-    setIsUrlSelected(false);
-  }
+const TextForm = ({ name, setPostQuery, label, error, handleChange, value }) => {
 
   setPostQuery(label, value);
+  const classes = useStyles();
   return (
     <FormControl className={classes.formControl} noValidate autoComplete="off">
       <TextField
@@ -55,7 +34,7 @@ const TextForm = ({ name, setPostQuery, label, setIsUrlSelected, error  }) => {
 export default compose(
   inject(STORE_KEYS.VIEWMODESTORE),
   observer,
-  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery, setIsUrlSelected } }) => ({
-    setPostQuery, setIsUrlSelected
+  withProps(({ [STORE_KEYS.VIEWMODESTORE]: { setPostQuery, setIsUrlSelected, isTextFormValue, handleChangeTextFormValue } }) => ({
+    setPostQuery, setIsUrlSelected, isTextFormValue, handleChangeTextFormValue
   }))
 )(TextForm);
