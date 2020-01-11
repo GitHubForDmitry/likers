@@ -56,7 +56,6 @@ class _SplitForm extends React.Component {
     };
     render() {
         const {price} = this.props;
-        console.log(price);
         return (
             <form className="stripe__form" onSubmit={this.handleSubmit}>
                 <label className="stripe__label">
@@ -89,7 +88,7 @@ class _SplitForm extends React.Component {
                         {...createOptions(this.props.fontSize)}
                     />
                 </label>
-                <button className="stripe__button">Pay {price.price}</button>
+                <button className="stripe__button">Pay {price}</button>
             </form>
         );
     }
@@ -120,6 +119,7 @@ class Checkout extends React.Component {
         return (
             <div className="Checkout">
                 <h1>Available Elements</h1>
+                <h1>{price.price}</h1>
                 <Elements>
                     <SplitForm price={price} fontSize={elementFontSize} />
                 </Elements>
