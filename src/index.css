@@ -62,6 +62,10 @@ stripe__button--error {
     border-bottom: 3px solid #e6ebf1;
 }
 
+.stripe__title {
+    font-size: 26px;
+}
+
 .stripe__button:hover {
     color: #fff;
     cursor: pointer;

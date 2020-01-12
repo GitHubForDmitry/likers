@@ -1,20 +1,12 @@
 import React from "react";
-import {
-  CardElement,
-  Elements,
-  injectStripe
-} from "react-stripe-elements";
+import { CardElement, Elements, injectStripe } from "react-stripe-elements";
 import TextForm from "../TextForm/TextForm";
+import Stripe from "../../media/stripe.png";
 
 const handleBlur = () => {
   console.log("[blur]");
 };
-const handleChange = change => {
-  console.log("[change]", change);
-  if(change.complete) {
-      console.log('true')
-  }else {console.log('false')}
-};
+
 const handleClick = () => {
   console.log("[click]");
 };
@@ -50,49 +42,46 @@ class _CardForm extends React.Component {
     super();
     this.state = {
       error: false,
-        errorMessage: ''
+      errorMessage: "",
+      payloadMessage: "",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
+  handleChange = ({error}) => {
+    if (error) {
+      this.setState({errorMessage: error.message});
+    }
+  };
+  handleSubmit = ev => {
+    ev.preventDefault();
+    if (this.props.stripe) {
+      this.props.stripe.createToken().then(payload => console.log(payload));
+    } else {
+      console.log("Stripe.js hasn't loaded yet.");
+    }
+  };
 
-    handleSubmit = ev => {
-        ev.preventDefault();
-        if (this.props.stripe) {
-            this.props.stripe.createToken().then(payload => {
-                if(typeof payload.error.code === 'string') {
-                    this.state.errorMessage = (payload.error.message);
-                    this.setState({errorMessage: this.state.errorMessage});
-                    console.log(this.props.valueMessenger);
-                    console.log(this.props. valueUrl);
-                    console.log(this.props. valueEmail);
-                }
-                if (typeof payload.token === "string") {
-                    return !this.state.error;
-                }
-                console.log("[token]", payload);
-            });
-        } else {
-            console.log("Stripe.js hasn't loaded yet.");
-        }
-    };
-
-
-    render() {
-    const { price }  = this.props;
+  render() {
+    const { price, title } = this.props;
     return (
       <form onSubmit={this.handleSubmit}>
+        <h2 className="stripe__title">{title}</h2>
         <label>
           Card details
           <CardElement
             onBlur={handleBlur}
-            onChange={handleChange}
+            onChange={this.handleChange}
             onFocus={handleFocus}
             onReady={handleReady}
             {...createOptions(this.props.fontSize)}
           />
-          <p style={{color: "#721c24"}}>{this.state.errorMessage}</p>
+          <div style={{ color: "#721c24" }} role="alert">
+            {this.state.errorMessage}
+          </div>
         </label>
         <button className="stripe__button">Pay ${price}</button>
+
       </form>
     );
   }
@@ -118,12 +107,31 @@ class Checkout extends React.Component {
 
   render() {
     const { elementFontSize } = this.state;
-    const { price, valueMessenger, valueUrl, valueEmail } = this.props;
+    const { price, valueMessenger, valueUrl, valueEmail, title } = this.props;
     return (
       <div className="Checkout">
-        <h1>Available Elements</h1>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+        >
+          <img
+            style={{ width: 100, height: "auto" }}
+            src={Stripe}
+            alt="stripe"
+          />
+        </div>
         <Elements>
-          <CardForm price={price} fontSize={elementFontSize} valueMessenger={valueMessenger} valueUrl={valueUrl} valueEmail={valueEmail} />
+          <CardForm
+            price={price}
+            title={title}
+            fontSize={elementFontSize}
+            valueMessenger={valueMessenger}
+            valueUrl={valueUrl}
+            valueEmail={valueEmail}
+          />
         </Elements>
       </div>
     );

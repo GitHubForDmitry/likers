@@ -9,7 +9,7 @@ import Stripe from "../../media/stripe.png";
 import TextForm from "../TextForm/TextForm";
 import CheckoutForm from "../Stripe";
 import Modal from "@material-ui/core/Modal";
-import React, {useEffect} from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { compose, withProps } from "recompose";
@@ -116,13 +116,7 @@ function ModalWindow({ tier }) {
         <div style={modalStyle} className={classes.paper}>
           <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
             <div className="example">
-              <div className={classes.stripe}>
-                <img
-                  style={{ width: 100, height: "auto" }}
-                  src={Stripe}
-                  alt="stripe"
-                />
-              </div>
+
               <Container
                 maxWidth="sm"
                 component="main"
@@ -184,6 +178,7 @@ function ModalWindow({ tier }) {
               <Elements>
                 <CheckoutForm
                   price={tier.price}
+                  title={tier.title}
                   valueMessenger={alignment}
                   valueUrl={valueUrl}
                   valueEmail={valueEmail}
